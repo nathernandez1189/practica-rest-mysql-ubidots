@@ -22,7 +22,7 @@ El reparto siguiente es una propuesta para presentar el trabajo; no acredita qui
 
 1. Explicar el simulador y sus cinco variables, incluyendo luminosidad y presión.
 2. Distinguir generación local de envío y recepción reales en Ubidots.
-3. Mostrar las capturas 07 y 08 del dashboard real y el registro `Sent` del evento. Distinguir correo enviado de correo recibido: la bandeja institucional aún no se ha inspeccionado.
+3. Mostrar las capturas 07 y 08 del dashboard real, el registro `Sent` del evento y la captura 11 del correo recibido, aportada por Natalia. Relacionar la hora 9:08 p. m. del mensaje con las 21:08:03 del registro.
 4. Mostrar la implementación JavaScript y que responde al mismo contrato, usando la misma base de MySQL.
 
 ## Preguntas probables

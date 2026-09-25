@@ -1,6 +1,6 @@
 # Ubidots: ejecución real y reproducción
 
-**Estado verificado:** cuenta STEM operativa, dispositivo `equipo-rest`, cinco variables recibidas desde Python/curl/Postman y cinco widgets funcionando. Newman completó 12 aserciones sin fallos. El evento envió el correo y registró éxito a las 21:08:03 del 24 de septiembre de 2026 (Colombia). **La recepción en la bandeja institucional aún no se ha inspeccionado.**
+**Estado verificado:** cuenta STEM operativa, dispositivo `equipo-rest`, cinco variables recibidas desde Python/curl/Postman y cinco widgets funcionando. Newman completó 12 aserciones sin fallos. El evento envió el correo y registró éxito a las 21:08:03 del 24 de septiembre de 2026 (Colombia). **La recepción está confirmada en la captura aportada por Natalia:** muestra Notifications Ubidots, la etiqueta Recibidos y las 9:08 p. m., coincidiendo con el registro del evento.
 
 - [Evidencias originales y alcance](../evidencias/ubidots/README.md).
 - [Dashboard del equipo](https://stem.ubidots.com/app/dashboards/6ab5d3c8d1003b3265a230eb), requiere iniciar sesión con la cuenta del equipo. El profesor puede revisar las capturas públicas sin acceder a esa cuenta.
@@ -67,7 +67,7 @@ python scripts/verify_ubidots.py recuperacion --output evidencias/ubidots/recupe
 
 Esperar a observar el tablero entre etapas. Cada comando valida los códigos internos de recepción y consulta los últimos valores hasta comprobar que coinciden. El flujo fue 24→34→24 °C. En Monitoring → Logs apareció **Sent**; el registro oficial contiene `successful_execution: true`. El asunto vigente es **Practica REST - Alerta de temperatura del equipo**. La primera prueba se envió antes de una corrección ortográfica del asunto, como consta en el registro histórico.
 
-Para cerrar el último requisito, abrir el correo institucional, buscar la alerta de Ubidots (también en correo no deseado) y guardar evidencia del mensaje recibido sin publicar otros correos o datos privados. Hasta observarlo, el estado de recepción permanece pendiente.
+El último requisito quedó cerrado con la [captura 11 aportada por Natalia](../evidencias/pantallazos/11-ubidots-correo-recibido.png). Muestra la alerta en Recibidos a las 9:08 p. m., el dispositivo `equipo-rest` y el umbral de 30 °C. Se conserva el archivo original sin editar; la dirección del destinatario no está desplegada. Esta verificación se realizó sobre la captura compartida, sin acceder directamente al buzón. La procedencia y huella del archivo están en `evidencias/ubidots/correo-recepcion.json`.
 
 ## 6. Evidencias guardadas
 
@@ -75,7 +75,7 @@ Para cerrar el último requisito, abrir el correo institucional, buscar la alert
 - Respuesta real del envío curl y Postman.
 - Dispositivo con cinco variables y marcas de tiempo.
 - Dashboard con gauge, mapa, barras y dos widgets adicionales.
-- Configuración del evento y registro de correo enviado. Recepción en bandeja: pendiente.
+- Configuración del evento, registro de correo enviado y captura original del mensaje recibido.
 
 ## Fuentes
 

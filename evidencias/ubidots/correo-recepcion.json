@@ -1,0 +1,18 @@
+{
+  "source": "Captura aportada por Natalia en esta conversación",
+  "original_filename": "Captura de pantalla 2026-09-24 a la(s) 9.21.02 p.m..png",
+  "evidence": "evidencias/pantallazos/11-ubidots-correo-recibido.png",
+  "sha256": "81aed593803d86a77f8929dcabf449ecbde5b745ed3ec06d3873b863c36b8e85",
+  "image_unchanged": true,
+  "observed": {
+    "sender_display_name": "Notifications Ubidots",
+    "mail_time_displayed": "9:08 p.m.",
+    "inbox_label": "Recibidos",
+    "capture_clock_displayed": "9:21",
+    "device_in_message": "equipo-rest",
+    "threshold_in_message": "30 °C"
+  },
+  "correlation": "Hora y contenido coinciden con el registro action_emails del 24 de septiembre de 2026 a las 21:08:03 America/Bogota.",
+  "verification_scope": "Recepción verificada visualmente en la captura aportada. No se accedió directamente al buzón; la dirección del destinatario no está desplegada.",
+  "status": "received_verified_from_user_screenshot"
+}

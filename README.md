@@ -7,7 +7,7 @@ Computación en la Nube · Especialización · 24 de septiembre de 2026
 
 Implementación y evidencias de las guías **Práctica REST** y **Práctica REST + MySQL**. Incluye el desafío opcional en JavaScript.
 
-> **Estado de entrega:** APIs y persistencia verificadas en Ubuntu. Ubidots STEM recibió las cinco variables desde Python, curl y Postman/Newman; el tablero y la actualización automática están comprobados. El evento `temperature > 30` registra el correo como enviado. **Solo falta confirmar la recepción en la bandeja institucional**, que no se ha inspeccionado.
+> **Estado de entrega:** APIs y persistencia verificadas en Ubuntu. Ubidots STEM recibió las cinco variables desde Python, curl y Postman/Newman; el tablero y la actualización automática están comprobados. El evento `temperature > 30` envió la alerta y **su recepción está confirmada mediante la captura aportada por Natalia**. Los requisitos técnicos y sus evidencias están completos.
 
 ## Empezar por aquí
 
@@ -36,7 +36,7 @@ flowchart LR
   J --> D
   S[Simulador Python - 5 variables] --> U[Ubidots STEM - 5 widgets]
   U --> E[Evento temperature mayor de 30]
-  E --> A[Correo enviado - registro confirmado]
+  E --> A[Correo enviado y recibido - evidencia confirmada]
 ```
 
 ## Resultados verificados
@@ -55,11 +55,12 @@ Los grupos siguientes contienen comprobaciones complementarias y parcialmente so
 | Ubidots desde curl | 5 variables recibidas | [respuesta real](evidencias/ubidots/curl-envio-real.json) |
 | Ubidots desde Postman/Newman | 12 aserciones correctas: envío y lectura | [resultado](evidencias/ubidots/postman-newman.txt) |
 | Dashboard Ubidots | 5 widgets y actualización automática | [alerta 34 °C](evidencias/pantallazos/07-ubidots-alerta-34.png), [recuperación 24 °C](evidencias/pantallazos/08-ubidots-recuperacion-24.png) |
+| Correo recibido | Verificado en la captura aportada por Natalia | [captura 11](evidencias/pantallazos/11-ubidots-correo-recibido.png) |
 | Evento de temperatura | Correo enviado; ejecución exitosa | [registro oficial](evidencias/ubidots/evento-logs.json), [captura](evidencias/pantallazos/09-ubidots-evento-enviado.png) |
 
 **Precisión sobre Postman:** se ejecutó la colección con Newman, su ejecutor oficial. No se presentan esos resultados como pruebas mediante la interfaz gráfica de Postman.
 
-**Precisión sobre IoT:** las pruebas unitarias usan dobles y `--dry-run` genera datos locales. Las pruebas reales adicionales están en `evidencias/ubidots/`; consultan el servicio y comprueban los valores guardados. El registro `Sent` acredita el envío del correo, no su recepción en la bandeja.
+**Precisión sobre IoT:** las pruebas unitarias usan dobles y `--dry-run` genera datos locales. Las pruebas reales adicionales están en `evidencias/ubidots/`; consultan el servicio y comprueban los valores guardados. El registro `Sent` acredita el envío; la [captura original aportada por Natalia](evidencias/pantallazos/11-ubidots-correo-recibido.png) confirma la recepción a las 9:08 p. m. Se documenta su [procedencia](evidencias/ubidots/correo-recepcion.json) sin modificar la imagen.
 
 ![Tablero real de Ubidots](evidencias/pantallazos/08-ubidots-recuperacion-24.png)
 

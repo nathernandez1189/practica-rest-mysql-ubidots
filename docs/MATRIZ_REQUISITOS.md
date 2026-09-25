@@ -23,7 +23,7 @@ Fecha de ejecución: 24 de septiembre de 2026, zona America/Bogota. Los registro
 | Ubidots: widgets de las dos nuevas variables | Verificado | Indicador de luminosidad y línea de presión |
 | Ubidots: actualización visible en tiempo real | Verificado | 34→24 °C, 78→65 %, 820→550 lux y 754→750 hPa |
 | Ubidots: evento y envío de correo | Verificado | `evento-configuracion.json`; `evento-logs.json`, éxito a las 21:08:03 |
-| Ubidots: correo recibido | Pendiente de inspección de bandeja institucional | Envío confirmado por Ubidots; recepción final aún no observada |
+| Ubidots: correo recibido | Verificado en captura aportada por Natalia | Captura 11: Notifications Ubidots, Recibidos, 9:08 p. m.; `correo-recepcion.json` documenta su procedencia |
 
 ## Alcance de las capturas
 
