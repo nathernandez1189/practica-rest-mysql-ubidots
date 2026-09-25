@@ -1,0 +1,40 @@
+{
+  "before_utc": "2026-09-25T01:31:28.872574+00:00",
+  "markers": {
+    "memory": {
+      "port": 5000,
+      "book": {
+        "author": "Natalia, Miguel y Juan Ospina",
+        "description": "",
+        "id": 6,
+        "title": "Persistencia - memory - 2026-09-25T01:31:28.872574+00:00"
+      },
+      "after_status": 404,
+      "passed": true
+    },
+    "mysql": {
+      "port": 5001,
+      "book": {
+        "author": "Natalia, Miguel y Juan Ospina",
+        "description": "",
+        "id": 9,
+        "title": "Persistencia - mysql - 2026-09-25T01:31:28.872574+00:00"
+      },
+      "after_status": 200,
+      "passed": true
+    },
+    "javascript": {
+      "port": 5002,
+      "book": {
+        "title": "Persistencia - javascript - 2026-09-25T01:31:28.872574+00:00",
+        "description": "",
+        "author": "Natalia, Miguel y Juan Ospina",
+        "id": 10
+      },
+      "after_status": 200,
+      "passed": true
+    }
+  },
+  "after_utc": "2026-09-25T01:34:11.810735+00:00",
+  "conclusion": "Memoria pierde el registro; MySQL conserva íntegros los registros creados desde Python y JavaScript."
+}

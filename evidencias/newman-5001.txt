@@ -1,0 +1,67 @@
+newman
+
+Práctica REST | Natalia · Miguel · Juan Ospina
+
+→ 01 Listar libros
+  GET http://192.168.100.3:5001/books [200 OK, 336B, 15ms]
+  ✓  HTTP 200
+  ✓  JSON válido
+  ✓  Lista de libros
+
+→ 02 Crear libro
+  POST http://192.168.100.3:5001/books [201 CREATED, 289B, 4ms]
+  ✓  HTTP 201
+  ✓  JSON válido
+
+→ 03 Consultar libro creado
+  GET http://192.168.100.3:5001/books/7 [200 OK, 264B, 2ms]
+  ✓  HTTP 200
+  ✓  JSON válido
+  ✓  Autor correcto
+
+→ 04 Actualizar libro
+  PUT http://192.168.100.3:5001/books/7 [200 OK, 292B, 5ms]
+  ✓  HTTP 200
+  ✓  JSON válido
+  ✓  Cambio guardado
+
+→ 05 Rechazar título vacío
+  POST http://192.168.100.3:5001/books [400 BAD REQUEST, 269B, 1ms]
+  ✓  HTTP 400
+  ✓  JSON válido
+
+→ 06 Rechazar tipo incorrecto
+  POST http://192.168.100.3:5001/books [400 BAD REQUEST, 269B, 1ms]
+  ✓  HTTP 400
+  ✓  JSON válido
+
+→ 07 Eliminar libro de prueba
+  DELETE http://192.168.100.3:5001/books/7 [200 OK, 166B, 3ms]
+  ✓  HTTP 200
+  ✓  JSON válido
+  ✓  Eliminado
+
+→ 08 Confirmar ausencia
+  GET http://192.168.100.3:5001/books/7 [404 NOT FOUND, 189B, 2ms]
+  ✓  HTTP 404
+  ✓  JSON válido
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │               8 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │               8 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │               0 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │              20 │               0 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 116ms                                   │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 818B (approx)                          │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 4ms [min: 1ms, max: 15ms, s.d.: 4ms] │
+└─────────────────────────────────────────────────────────────┘

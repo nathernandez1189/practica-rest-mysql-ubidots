@@ -1,0 +1,5 @@
+Current machine states:
+
+servidorUbuntu            poweroff (virtualbox)
+
+The VM is powered off. To restart the VM, simply run `vagrant up`

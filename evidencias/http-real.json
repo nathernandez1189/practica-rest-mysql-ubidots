@@ -1,0 +1,318 @@
+{
+  "timestamp_utc": "2026-09-25T01:31:16.099423+00:00",
+  "kind": "HTTP real contra servicios activos",
+  "results": [
+    {
+      "url": "http://127.0.0.1:5000",
+      "checks": [
+        {
+          "method": "GET",
+          "path": "/health",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 201,
+          "actual": 201,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/3",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "PUT",
+          "path": "/books/3",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/3",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "PUT",
+          "path": "/books/3",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/2147483647",
+          "expected": 404,
+          "actual": 404,
+          "passed": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/books/2147483647",
+          "expected": 404,
+          "actual": 404,
+          "passed": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/books/3",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/3",
+          "expected": 404,
+          "actual": 404,
+          "passed": true
+        }
+      ],
+      "passed": 14
+    },
+    {
+      "url": "http://127.0.0.1:5001",
+      "checks": [
+        {
+          "method": "GET",
+          "path": "/health",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 201,
+          "actual": 201,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/3",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "PUT",
+          "path": "/books/3",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/3",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "PUT",
+          "path": "/books/3",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/2147483647",
+          "expected": 404,
+          "actual": 404,
+          "passed": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/books/2147483647",
+          "expected": 404,
+          "actual": 404,
+          "passed": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/books/3",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/3",
+          "expected": 404,
+          "actual": 404,
+          "passed": true
+        }
+      ],
+      "passed": 14
+    },
+    {
+      "url": "http://127.0.0.1:5002",
+      "checks": [
+        {
+          "method": "GET",
+          "path": "/health",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 201,
+          "actual": 201,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/4",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "PUT",
+          "path": "/books/4",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/4",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "PUT",
+          "path": "/books/4",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "POST",
+          "path": "/books",
+          "expected": 400,
+          "actual": 400,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/2147483647",
+          "expected": 404,
+          "actual": 404,
+          "passed": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/books/2147483647",
+          "expected": 404,
+          "actual": 404,
+          "passed": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/books/4",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "method": "GET",
+          "path": "/books/4",
+          "expected": 404,
+          "actual": 404,
+          "passed": true
+        }
+      ],
+      "passed": 14
+    }
+  ]
+}

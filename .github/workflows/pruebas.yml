@@ -1,0 +1,57 @@
+name: Pruebas REST e IoT
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
+      - run: pytest -v --junitxml=results.xml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resultados-pytest
+          path: results.xml
+  integracion:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ci-only-root-password
+          MYSQL_DATABASE: rest_equipo
+          MYSQL_USER: rest_equipo
+          MYSQL_PASSWORD: ci-only-rest-password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_PORT: 3306
+      MYSQL_DB: rest_equipo
+      MYSQL_USER: rest_equipo
+      MYSQL_PASSWORD: ci-only-rest-password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: pip install -r requirements.txt
+      - run: npm ci --prefix bonus-node --no-audit --no-fund
+      - run: bash scripts/ci_integration.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resultados-integracion
+          path: |
+            integration-results.json
+            newman-*.json

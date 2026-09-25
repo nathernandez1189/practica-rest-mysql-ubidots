@@ -1,0 +1,11 @@
+Fri Sep 25 01:34:11 AM UTC 2026
+servidorUbuntu
+aarch64
+Ubuntu 22.04.5 LTS
+Python 3.10.12
+v20.20.2
+active
+active
+active
+active
+8.0.46-0ubuntu0.22.04.4

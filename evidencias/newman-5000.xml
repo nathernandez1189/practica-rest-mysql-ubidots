@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Práctica REST | Natalia · Miguel · Juan Ospina" tests="8" time="0.033">
+  <testsuite name="01 Listar libros" id="9f2efd25-6f3c-4970-98ff-1ff79991bffd" timestamp="2026-09-25T01:31:27.954Z" tests="3" failures="0" errors="0" time="0.022">
+    <testcase name="HTTP 200" time="0.022" classname="01ListarLibros"/>
+    <testcase name="JSON válido" time="0.022" classname="01ListarLibros"/>
+    <testcase name="Lista de libros" time="0.022" classname="01ListarLibros"/>
+  </testsuite>
+  <testsuite name="02 Crear libro" id="936914a5-c7aa-4eb9-96ab-5637d3f0f3bd" timestamp="2026-09-25T01:31:27.954Z" tests="2" failures="0" errors="0" time="0.003">
+    <testcase name="HTTP 201" time="0.003" classname="02CrearLibro"/>
+    <testcase name="JSON válido" time="0.003" classname="02CrearLibro"/>
+  </testsuite>
+  <testsuite name="03 Consultar libro creado" id="38785b2d-e8ac-4ffb-8853-ca59b694ed4c" timestamp="2026-09-25T01:31:27.954Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="HTTP 200" time="0.001" classname="03ConsultarLibroCreado"/>
+    <testcase name="JSON válido" time="0.001" classname="03ConsultarLibroCreado"/>
+    <testcase name="Autor correcto" time="0.001" classname="03ConsultarLibroCreado"/>
+  </testsuite>
+  <testsuite name="04 Actualizar libro" id="dffb2dc7-cd26-4954-9aba-8feffa916187" timestamp="2026-09-25T01:31:27.954Z" tests="3" failures="0" errors="0" time="0.002">
+    <testcase name="HTTP 200" time="0.002" classname="04ActualizarLibro"/>
+    <testcase name="JSON válido" time="0.002" classname="04ActualizarLibro"/>
+    <testcase name="Cambio guardado" time="0.002" classname="04ActualizarLibro"/>
+  </testsuite>
+  <testsuite name="05 Rechazar título vacío" id="da451459-6661-45cb-8a26-53b74687f991" timestamp="2026-09-25T01:31:27.954Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="HTTP 400" time="0.001" classname="05RechazarTituloVacio"/>
+    <testcase name="JSON válido" time="0.001" classname="05RechazarTituloVacio"/>
+  </testsuite>
+  <testsuite name="06 Rechazar tipo incorrecto" id="12a5b8ec-ed5f-4712-9321-3745a13a6f8b" timestamp="2026-09-25T01:31:27.954Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="HTTP 400" time="0.001" classname="06RechazarTipoIncorrecto"/>
+    <testcase name="JSON válido" time="0.001" classname="06RechazarTipoIncorrecto"/>
+  </testsuite>
+  <testsuite name="07 Eliminar libro de prueba" id="43d8502d-c5fe-41d7-bf8e-15feab75f1e0" timestamp="2026-09-25T01:31:27.954Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="HTTP 200" time="0.001" classname="07EliminarLibroDePrueba"/>
+    <testcase name="JSON válido" time="0.001" classname="07EliminarLibroDePrueba"/>
+    <testcase name="Eliminado" time="0.001" classname="07EliminarLibroDePrueba"/>
+  </testsuite>
+  <testsuite name="08 Confirmar ausencia" id="922c011c-8692-4ce8-8ceb-7cde99262968" timestamp="2026-09-25T01:31:27.954Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="HTTP 404" time="0.002" classname="08ConfirmarAusencia"/>
+    <testcase name="JSON válido" time="0.002" classname="08ConfirmarAusencia"/>
+  </testsuite>
+</testsuites>

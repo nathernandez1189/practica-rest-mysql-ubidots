@@ -1,0 +1,126 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>Práctica REST · Evidencias del equipo</title><style>
+*{box-sizing:border-box}body{margin:0;font:16px system-ui,sans-serif;color:#142b43;background:#f2f5f9}header{background:#132b45;color:#fff;padding:18px 30px}header small{color:#8adfc6;letter-spacing:2px}h1{font-size:32px;margin:8px 0}header p{margin:5px 0;color:#d4dfeb}nav{display:flex;gap:8px;background:white;padding:10px 30px;border-bottom:1px solid #d7e1e9}button{border:1px solid #bccdda;background:#fff;color:#173551;border-radius:7px;padding:10px 17px;font-weight:650;cursor:pointer}button.active{background:#176b65;color:white;border-color:#176b65}main{max-width:1240px;padding:18px 30px;margin:auto}h2{font-size:24px;margin:0 0 15px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card,article{background:white;border:1px solid #dbe4ec;border-radius:12px;padding:16px}.card strong{font-size:36px;display:block;color:#14695e}.card span{font-size:15px;color:#536c7f}article{margin-top:20px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid #e5eaf0}th{background:#f3f6fa}.ok{color:#067351;font-weight:700}.pending{background:#fff3d8;color:#745109;padding:15px 19px;border-radius:8px;margin-top:20px}pre{font:11px/1.3 ui-monospace,SFMono-Regular,monospace;background:#14283c;color:#d6e9f4;padding:14px;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere}.muted{color:#587086;font-size:14px}.panel{display:none}.panel.active{display:block}footer{margin-top:18px;font-size:13px;color:#577084}a{color:#08766b}
+</style><header><small>COMPUTACIÓN EN LA NUBE · INFORME DE EVIDENCIAS</small><h1>REST + MySQL + IoT</h1><p>Natalia Hernández Piedrahita · Miguel Ángel Diuza · Juan Ospina Tenorio</p><p>24 septiembre 2026 · Ubuntu 22.04 ARM64 · Vagrant / VirtualBox</p></header><nav><button class="active" onclick="show(0)">Resumen</button><button class="" onclick="show(1)">MySQL</button><button class="" onclick="show(2)">Persistencia</button><button class="" onclick="show(3)">Postman</button><button class="" onclick="show(4)">curl</button><button class="" onclick="show(5)">Pruebas Python</button></nav><main><section class="panel active"><h2>Resultados comprobados</h2><div class="cards"><div class="card"><strong>35/35</strong><span>Pruebas automáticas Python</span></div><div class="card"><strong>42/42</strong><span>Respuestas HTTP reales correctas</span></div><div class="card"><strong>60/60</strong><span>Aserciones Postman / Newman</span></div></div><article><table><tr><th>Implementación</th><th>Almacenamiento</th><th>Resultado</th></tr><tr><td>Python Flask · puerto 5000</td><td>Memoria del proceso</td><td class="ok">CRUD verificado</td></tr><tr><td>Python Flask · puerto 5001</td><td>MySQL 8.0.46</td><td class="ok">CRUD y persistencia verificados</td></tr><tr><td>Desafío JavaScript · puerto 5002</td><td>MySQL compartido</td><td class="ok">CRUD y persistencia verificados</td></tr></table></article><div class="pending"><b>Ubidots: pendiente de cuenta.</b> Simulador de cinco variables y pruebas locales listos. Recepción, dashboard y correo todavía sin verificar.</div><p class="muted">Este panel presenta registros de ejecución locales. No es un dashboard de Ubidots.</p></section><section class="panel"><h2>Inspección directa de MySQL</h2><p>Base aislada <b>rest_equipo</b> · Tabla <b>books</b> · Consulta ejecutada dentro de Ubuntu</p><pre>+-------------------------+
+| version_mysql           |
++-------------------------+
+| 8.0.46-0ubuntu0.22.04.4 |
++-------------------------+
++-----------------------+
+| Tables_in_rest_equipo |
++-----------------------+
+| books                 |
++-----------------------+
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int          | NO   | PRI | NULL    | auto_increment |
+| title       | varchar(255) | NO   |     | NULL    |                |
+| description | varchar(255) | NO   |     |         |                |
+| author      | varchar(255) | NO   |     |         |                |
++-------------+--------------+------+-----+---------+----------------+
++----+--------------------------------------+-------------+--------+
+| id | title                                | description | author |
++----+--------------------------------------+-------------+--------+
+|  1 | La hojarasca                         | Good one    | Gabo   |
+|  2 | El coronel no tiene quien le escriba | Interesting | Gabo   |
++----+--------------------------------------+-------------+--------+
+</pre></section><section class="panel"><h2>Persistencia después de apagar y encender Ubuntu</h2><article><table><tr><th>Implementación</th><th>ID</th><th>Antes</th><th>Después</th><th>Verificación</th></tr><tr><td>memory</td><td>6</td><td>Creado (201)</td><td>404</td><td class="ok">Correcto</td></tr><tr><td>mysql</td><td>9</td><td>Creado (201)</td><td>200</td><td class="ok">Correcto</td></tr><tr><td>javascript</td><td>10</td><td>Creado (201)</td><td>200</td><td class="ok">Correcto</td></tr></table><p><b>Memoria:</b> el registro desaparece (404). <b>MySQL:</b> ambos registros sobreviven íntegros (200).</p></article><pre>Current machine states:
+
+servidorUbuntu            poweroff (virtualbox)
+
+The VM is powered off. To restart the VM, simply run `vagrant up`
+</pre><p class="muted">Antes: 2026-09-25T01:31:28.872574+00:00<br>Después: 2026-09-25T01:34:11.810735+00:00</p><p>Se apagó la VM de forma ordenada. No se borró el disco ni se destruyó la máquina.</p></section><section class="panel"><h2>Colección Postman ejecutada con Newman</h2><p>Ocho peticiones por servicio: consulta, creación, actualización, validación y eliminación.</p><article><table><tr><th>Puerto</th><th>Peticiones</th><th>Aserciones</th><th>Resultado</th></tr><tr><td>5000</td><td>8</td><td>20</td><td class="ok">0 fallos</td></tr><tr><td>5001</td><td>8</td><td>20</td><td class="ok">0 fallos</td></tr><tr><td>5002</td><td>8</td><td>20</td><td class="ok">0 fallos</td></tr></table></article><pre>
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │               8 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │               8 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │               0 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │              20 │               0 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 116ms                                   │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 818B (approx)                          │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 4ms [min: 1ms, max: 15ms, s.d.: 4ms] │
+└─────────────────────────────────────────────────────────────┘</pre><p class="muted">Prueba realizada con Newman, ejecutor oficial de Postman; no corresponde a su interfaz gráfica.</p></section><section class="panel"><h2>Pruebas reales con curl · MySQL</h2><pre>== GET /books ==
+{&quot;books&quot;:[{&quot;author&quot;:&quot;Gabo&quot;,&quot;description&quot;:&quot;Good one&quot;,&quot;id&quot;:1,&quot;title&quot;:&quot;La hojarasca&quot;},{&quot;author&quot;:&quot;Gabo&quot;,&quot;description&quot;:&quot;Interesting&quot;,&quot;id&quot;:2,&quot;title&quot;:&quot;El coronel no tiene quien le escriba&quot;}]}
+
+HTTP 200 (esperado 200)
+== POST /books ==
+{&quot;book&quot;:{&quot;author&quot;:&quot;Natalia, Miguel y Juan Ospina&quot;,&quot;description&quot;:&quot;&quot;,&quot;id&quot;:5,&quot;title&quot;:&quot;Evidencia curl&quot;}}
+
+HTTP 201 (esperado 201)
+== GET /books/5 ==
+{&quot;book&quot;:{&quot;author&quot;:&quot;Natalia, Miguel y Juan Ospina&quot;,&quot;description&quot;:&quot;&quot;,&quot;id&quot;:5,&quot;title&quot;:&quot;Evidencia curl&quot;}}
+
+HTTP 200 (esperado 200)
+== PUT /books/5 ==
+{&quot;book&quot;:{&quot;author&quot;:&quot;Natalia, Miguel y Juan Ospina&quot;,&quot;description&quot;:&quot;Actualizado con curl&quot;,&quot;id&quot;:5,&quot;title&quot;:&quot;Evidencia curl&quot;}}
+
+HTTP 200 (esperado 200)
+== POST /books ==
+{&quot;error&quot;:&quot;Envía un objeto JSON con title no vacío; los campos deben ser textos de máximo 255 caracteres&quot;}
+
+HTTP 400 (esperado 400)
+== DELETE /books/5 ==
+{&quot;result&quot;:true}
+
+HTTP 200 (esperado 200)
+== GET /books/5 ==
+{&quot;error&quot;:&quot;Libro no encontrado&quot;}
+
+HTTP 404 (esperado 404)
+RESULTADO: 7/7 respuestas correctas
+</pre></section><section class="panel"><h2>Pruebas automáticas Python</h2><p>Validación del CRUD, errores, memoria y contrato del simulador IoT.</p><pre>============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-8.4.2, pluggy-1.6.0 -- /home/vagrant/practica-rest-equipo/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/vagrant/practica-rest-equipo
+configfile: pytest.ini
+testpaths: tests
+collecting ... collected 35 items
+
+tests/test_api.py::test_crud PASSED                                      [  2%]
+tests/test_api.py::test_invalid_create[None] PASSED                      [  5%]
+tests/test_api.py::test_invalid_create[payload1] PASSED                  [  8%]
+tests/test_api.py::test_invalid_create[payload2] PASSED                  [ 11%]
+tests/test_api.py::test_invalid_create[payload3] PASSED                  [ 14%]
+tests/test_api.py::test_invalid_create[payload4] PASSED                  [ 17%]
+tests/test_api.py::test_invalid_create[payload5] PASSED                  [ 20%]
+tests/test_api.py::test_invalid_create[payload6] PASSED                  [ 22%]
+tests/test_api.py::test_invalid_create[payload7] PASSED                  [ 25%]
+tests/test_api.py::test_invalid_create[payload8] PASSED                  [ 28%]
+tests/test_api.py::test_invalid_create[payload9] PASSED                  [ 31%]
+tests/test_api.py::test_missing[get] PASSED                              [ 34%]
+tests/test_api.py::test_missing[put] PASSED                              [ 37%]
+tests/test_api.py::test_missing[delete] PASSED                           [ 40%]
+tests/test_api.py::test_delete_all_and_create PASSED                     [ 42%]
+tests/test_api.py::test_ids_not_reused PASSED                            [ 45%]
+tests/test_api.py::test_sql_string_is_data PASSED                        [ 48%]
+tests/test_api.py::test_memory_restart PASSED                            [ 51%]
+tests/test_api.py::test_malformed_json PASSED                            [ 54%]
+tests/test_api.py::test_unknown_route_json PASSED                        [ 57%]
+tests/test_api.py::test_reject_empty_update PASSED                       [ 60%]
+tests/test_api.py::test_health PASSED                                    [ 62%]
+tests/test_mysql_failure.py::test_database_unavailable_returns_503_without_details PASSED [ 65%]
+tests/test_ubidots.py::test_five_variables PASSED                        [ 68%]
+tests/test_ubidots.py::test_request_contract PASSED                      [ 71%]
+tests/test_ubidots.py::test_reject_http_errors[301] PASSED               [ 74%]
+tests/test_ubidots.py::test_reject_http_errors[400] PASSED               [ 77%]
+tests/test_ubidots.py::test_reject_http_errors[401] PASSED               [ 80%]
+tests/test_ubidots.py::test_reject_http_errors[403] PASSED               [ 82%]
+tests/test_ubidots.py::test_reject_http_errors[429] PASSED               [ 85%]
+tests/test_ubidots.py::test_reject_http_errors[500] PASSED               [ 88%]
+tests/test_ubidots.py::test_reject_partial_failure PASSED                [ 91%]
+tests/test_ubidots.py::test_no_token_to_untrusted_destination[http://industrial.api.ubidots.com] PASSED [ 94%]
+tests/test_ubidots.py::test_no_token_to_untrusted_destination[https://example.com] PASSED [ 97%]
+tests/test_ubidots.py::test_invalid_device PASSED                        [100%]
+
+- generated xml file: /home/vagrant/practica-rest-equipo/evidencias/pytest.xml -
+============================== 35 passed in 0.14s ==============================
+</pre></section><footer>Fuentes auditables: archivos originales JSON, XML y TXT de la carpeta evidencias del repositorio.</footer></main><script>function show(n){document.querySelectorAll('.panel').forEach((x,i)=>x.classList.toggle('active',i===n));document.querySelectorAll('button').forEach((x,i)=>x.classList.toggle('active',i===n));history.replaceState(null,'','#'+n)}if(location.hash)show(Number(location.hash.slice(1))||0)</script></html>

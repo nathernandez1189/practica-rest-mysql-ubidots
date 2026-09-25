@@ -1,0 +1,45 @@
+{
+  "info": {
+    "name": "Ubidots | cinco variables",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "device",
+      "value": "equipo-rest"
+    }
+  ],
+  "item": [
+    {
+      "name": "Enviar cinco variables a Ubidots",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Auth-Token",
+            "value": "{{ubidots_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "https://industrial.api.ubidots.com/api/v1.6/devices/{{device}}/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"temperature\": 24, \"humidity\": 65, \"position\": {\"value\": 1, \"context\": {\"lat\": 4.711, \"lng\": -74.0721}}, \"luminosity\": 550, \"pressure\": 750}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Recepci\u00f3n HTTP',()=>pm.expect(pm.response.code).to.be.within(200,299));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

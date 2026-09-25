@@ -1,0 +1,22 @@
+== GET /books ==
+{"books":[{"id":1,"title":"La hojarasca","description":"Good one","author":"Gabo"},{"id":2,"title":"El coronel no tiene quien le escriba","description":"Interesting","author":"Gabo"}]}
+HTTP 200 (esperado 200)
+== POST /books ==
+{"book":{"title":"Evidencia curl","description":"","author":"Natalia, Miguel y Juan Ospina","id":6}}
+HTTP 201 (esperado 201)
+== GET /books/6 ==
+{"book":{"id":6,"title":"Evidencia curl","description":"","author":"Natalia, Miguel y Juan Ospina"}}
+HTTP 200 (esperado 200)
+== PUT /books/6 ==
+{"book":{"id":6,"title":"Evidencia curl","description":"Actualizado con curl","author":"Natalia, Miguel y Juan Ospina"}}
+HTTP 200 (esperado 200)
+== POST /books ==
+{"error":"Campos inválidos"}
+HTTP 400 (esperado 400)
+== DELETE /books/6 ==
+{"result":true}
+HTTP 200 (esperado 200)
+== GET /books/6 ==
+{"error":"Libro no encontrado"}
+HTTP 404 (esperado 404)
+RESULTADO: 7/7 respuestas correctas

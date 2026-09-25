@@ -1,0 +1,239 @@
+{
+  "info": {
+    "name": "Práctica REST | Natalia · Miguel · Juan Ospina",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://192.168.100.3:5001"
+    },
+    {
+      "key": "book_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Listar libros",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/books"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('JSON válido', () => pm.response.to.be.json);",
+              "pm.test('Lista de libros',()=>pm.expect(pm.response.json().books).to.be.an('array'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Crear libro",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": \"Libro de prueba del equipo\", \"author\": \"Natalia, Miguel y Juan Ospina\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 201', () => pm.response.to.have.status(201));",
+              "pm.test('JSON válido', () => pm.response.to.be.json);",
+              "pm.collectionVariables.set('book_id',pm.response.json().book.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Consultar libro creado",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/books/{{book_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('JSON válido', () => pm.response.to.be.json);",
+              "pm.test('Autor correcto',()=>pm.expect(pm.response.json().book.author).to.eql('Natalia, Miguel y Juan Ospina'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Actualizar libro",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/books/{{book_id}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"description\": \"Actualizado mediante Postman\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('JSON válido', () => pm.response.to.be.json);",
+              "pm.test('Cambio guardado',()=>pm.expect(pm.response.json().book.description).to.eql('Actualizado mediante Postman'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Rechazar título vacío",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": \"\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 400', () => pm.response.to.have.status(400));",
+              "pm.test('JSON válido', () => pm.response.to.be.json);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 Rechazar tipo incorrecto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": 123}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 400', () => pm.response.to.have.status(400));",
+              "pm.test('JSON válido', () => pm.response.to.be.json);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 Eliminar libro de prueba",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{base_url}}/books/{{book_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('JSON válido', () => pm.response.to.be.json);",
+              "pm.test('Eliminado',()=>pm.expect(pm.response.json().result).to.eql(true));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 Confirmar ausencia",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/books/{{book_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 404', () => pm.response.to.have.status(404));",
+              "pm.test('JSON válido', () => pm.response.to.be.json);"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

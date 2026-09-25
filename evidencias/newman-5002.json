@@ -1,0 +1,2400 @@
+{
+  "collection": {
+    "item": [
+      {
+        "id": "8511538b-f577-4207-8231-f7d80c0fa198",
+        "name": "01 Listar libros",
+        "request": {
+          "url": {
+            "path": [
+              "books"
+            ],
+            "host": [
+              "{{base_url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "4c0dd4a8-8554-46aa-a6e8-bad7b6670b3a",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                "pm.test('JSON válido', () => pm.response.to.be.json);",
+                "pm.test('Lista de libros',()=>pm.expect(pm.response.json().books).to.be.an('array'));"
+              ],
+              "_lastExecutionId": "2b2fcb19-24dd-4fe1-b3b1-c5d5d0f4ed13"
+            }
+          }
+        ]
+      },
+      {
+        "id": "054c1adb-f722-4566-8ea8-b615d0dc3387",
+        "name": "02 Crear libro",
+        "request": {
+          "url": {
+            "path": [
+              "books"
+            ],
+            "host": [
+              "{{base_url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": \"Libro de prueba del equipo\", \"author\": \"Natalia, Miguel y Juan Ospina\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "f0c8d8b6-1b3a-44eb-93a9-8b20c8e1fba6",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 201', () => pm.response.to.have.status(201));",
+                "pm.test('JSON válido', () => pm.response.to.be.json);",
+                "pm.collectionVariables.set('book_id',pm.response.json().book.id);"
+              ],
+              "_lastExecutionId": "e63f90ed-6e1d-4ef9-ae44-d9d901cb22a0"
+            }
+          }
+        ]
+      },
+      {
+        "id": "9d1a43a3-61f6-4e7d-89c2-3422e10cd3b7",
+        "name": "03 Consultar libro creado",
+        "request": {
+          "url": {
+            "path": [
+              "books",
+              "{{book_id}}"
+            ],
+            "host": [
+              "{{base_url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "b8474119-a1f6-474c-89a4-e1e0b4cada3f",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                "pm.test('JSON válido', () => pm.response.to.be.json);",
+                "pm.test('Autor correcto',()=>pm.expect(pm.response.json().book.author).to.eql('Natalia, Miguel y Juan Ospina'));"
+              ],
+              "_lastExecutionId": "f3af7e89-d246-4ac3-9c04-e5e45a101a31"
+            }
+          }
+        ]
+      },
+      {
+        "id": "5a89b184-2a7d-42dd-b708-f845e359aafd",
+        "name": "04 Actualizar libro",
+        "request": {
+          "url": {
+            "path": [
+              "books",
+              "{{book_id}}"
+            ],
+            "host": [
+              "{{base_url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "PUT",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"description\": \"Actualizado mediante Postman\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "7ecdd59e-873c-417e-8866-9f36d6d85a96",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                "pm.test('JSON válido', () => pm.response.to.be.json);",
+                "pm.test('Cambio guardado',()=>pm.expect(pm.response.json().book.description).to.eql('Actualizado mediante Postman'));"
+              ],
+              "_lastExecutionId": "3adcf6f1-666e-4627-896b-99b788eb7343"
+            }
+          }
+        ]
+      },
+      {
+        "id": "cfb3a65a-9a58-401d-81c8-35046ec4abe0",
+        "name": "05 Rechazar título vacío",
+        "request": {
+          "url": {
+            "path": [
+              "books"
+            ],
+            "host": [
+              "{{base_url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": \"\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "76429472-9870-45d3-a91d-5cd0ea22a475",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 400', () => pm.response.to.have.status(400));",
+                "pm.test('JSON válido', () => pm.response.to.be.json);"
+              ],
+              "_lastExecutionId": "a24aacdc-d1e8-4ced-b9ae-3f14bbb71227"
+            }
+          }
+        ]
+      },
+      {
+        "id": "9d7c66fd-1677-49c3-98da-317c4558a1a6",
+        "name": "06 Rechazar tipo incorrecto",
+        "request": {
+          "url": {
+            "path": [
+              "books"
+            ],
+            "host": [
+              "{{base_url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": 123}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "6059f6b5-ed24-46b1-bdd3-955de72c0940",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 400', () => pm.response.to.have.status(400));",
+                "pm.test('JSON válido', () => pm.response.to.be.json);"
+              ],
+              "_lastExecutionId": "32e19bf9-a65c-45d7-99f2-3e42db4f4a70"
+            }
+          }
+        ]
+      },
+      {
+        "id": "7b27e8f8-a2af-4cf0-b4ab-0e1a0604cd73",
+        "name": "07 Eliminar libro de prueba",
+        "request": {
+          "url": {
+            "path": [
+              "books",
+              "{{book_id}}"
+            ],
+            "host": [
+              "{{base_url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "DELETE"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "c4aa1332-7ca1-42f5-bdbb-042215083675",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                "pm.test('JSON válido', () => pm.response.to.be.json);",
+                "pm.test('Eliminado',()=>pm.expect(pm.response.json().result).to.eql(true));"
+              ],
+              "_lastExecutionId": "674c2b3e-7950-4303-8b6a-a611553b93f2"
+            }
+          }
+        ]
+      },
+      {
+        "id": "b7c669d3-60a0-431b-94e8-05793a773d8b",
+        "name": "08 Confirmar ausencia",
+        "request": {
+          "url": {
+            "path": [
+              "books",
+              "{{book_id}}"
+            ],
+            "host": [
+              "{{base_url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "504b9607-b785-44b0-811e-4d77cc19d90b",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 404', () => pm.response.to.have.status(404));",
+                "pm.test('JSON válido', () => pm.response.to.be.json);"
+              ],
+              "_lastExecutionId": "7ac80b9c-465c-4104-91e7-718079223980"
+            }
+          }
+        ]
+      }
+    ],
+    "event": [],
+    "variable": [
+      {
+        "type": "any",
+        "value": "http://192.168.100.3:5001",
+        "key": "base_url"
+      },
+      {
+        "type": "any",
+        "value": "",
+        "key": "book_id"
+      }
+    ],
+    "info": {
+      "_postman_id": "95dc5fc9-98d5-4ac3-b7ff-e474b913064d",
+      "name": "Práctica REST | Natalia · Miguel · Juan Ospina",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "id": "7c1bcb6f-fafe-460f-8f05-764c21a9c4c8",
+    "values": [
+      {
+        "type": "any",
+        "value": "http://192.168.100.3:5002",
+        "key": "base_url"
+      }
+    ]
+  },
+  "globals": {
+    "id": "cae1d1f0-41f1-40b4-ad52-2fefdcc82d95",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 20,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 4.125,
+      "responseMin": 1,
+      "responseMax": 18,
+      "responseSd": 5.44144971491973,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1790299888706,
+      "completed": 1790299888819
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 8,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "806d1d2e-9cd6-41af-97e4-03fe4e1696b8",
+          "httpRequestId": "685aabb7-7c25-4d58-8553-ed279769ad70"
+        },
+        "item": {
+          "id": "8511538b-f577-4207-8231-f7d80c0fa198",
+          "name": "01 Listar libros",
+          "request": {
+            "url": {
+              "path": [
+                "books"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "4c0dd4a8-8554-46aa-a6e8-bad7b6670b3a",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('JSON válido', () => pm.response.to.be.json);",
+                  "pm.test('Lista de libros',()=>pm.expect(pm.response.json().books).to.be.an('array'));"
+                ],
+                "_lastExecutionId": "2b2fcb19-24dd-4fe1-b3b1-c5d5d0f4ed13"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "5002",
+            "path": [
+              "books"
+            ],
+            "host": [
+              "192",
+              "168",
+              "100",
+              "3"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "cdb63ec1-f6ee-48c4-99b4-b1efd6d6f952",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "192.168.100.3:5002",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "be67f57b-4377-45d5-835b-d5b8ddaa7ab1",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 25 Sep 2026 01:31:28 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              98,
+              111,
+              111,
+              107,
+              115,
+              34,
+              58,
+              91,
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              76,
+              97,
+              32,
+              104,
+              111,
+              106,
+              97,
+              114,
+              97,
+              115,
+              99,
+              97,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              71,
+              111,
+              111,
+              100,
+              32,
+              111,
+              110,
+              101,
+              34,
+              44,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              34,
+              71,
+              97,
+              98,
+              111,
+              34,
+              125,
+              44,
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              50,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              69,
+              108,
+              32,
+              99,
+              111,
+              114,
+              111,
+              110,
+              101,
+              108,
+              32,
+              110,
+              111,
+              32,
+              116,
+              105,
+              101,
+              110,
+              101,
+              32,
+              113,
+              117,
+              105,
+              101,
+              110,
+              32,
+              108,
+              101,
+              32,
+              101,
+              115,
+              99,
+              114,
+              105,
+              98,
+              97,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              73,
+              110,
+              116,
+              101,
+              114,
+              101,
+              115,
+              116,
+              105,
+              110,
+              103,
+              34,
+              44,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              34,
+              71,
+              97,
+              98,
+              111,
+              34,
+              125,
+              93,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 18,
+          "responseSize": 184
+        },
+        "id": "8511538b-f577-4207-8231-f7d80c0fa198",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "JSON válido",
+            "skipped": false
+          },
+          {
+            "assertion": "Lista de libros",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "0f30beec-23e9-4e9d-86d5-387aa858f34f",
+          "length": 8,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "9818753b-b83a-4b5d-9759-7ac6bcbb14c1"
+        },
+        "item": {
+          "id": "054c1adb-f722-4566-8ea8-b615d0dc3387",
+          "name": "02 Crear libro",
+          "request": {
+            "url": {
+              "path": [
+                "books"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Libro de prueba del equipo\", \"author\": \"Natalia, Miguel y Juan Ospina\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "f0c8d8b6-1b3a-44eb-93a9-8b20c8e1fba6",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201', () => pm.response.to.have.status(201));",
+                  "pm.test('JSON válido', () => pm.response.to.be.json);",
+                  "pm.collectionVariables.set('book_id',pm.response.json().book.id);"
+                ],
+                "_lastExecutionId": "e63f90ed-6e1d-4ef9-ae44-d9d901cb22a0"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "5002",
+            "path": [
+              "books"
+            ],
+            "host": [
+              "192",
+              "168",
+              "100",
+              "3"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "8e07648e-8b5f-4dd2-936c-54cbc560eed4",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "192.168.100.3:5002",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "82",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": \"Libro de prueba del equipo\", \"author\": \"Natalia, Miguel y Juan Ospina\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "c8f259fc-426a-4b8c-aea9-78698093a396",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Location",
+              "value": "/books/8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 25 Sep 2026 01:31:28 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              98,
+              111,
+              111,
+              107,
+              34,
+              58,
+              123,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              76,
+              105,
+              98,
+              114,
+              111,
+              32,
+              100,
+              101,
+              32,
+              112,
+              114,
+              117,
+              101,
+              98,
+              97,
+              32,
+              100,
+              101,
+              108,
+              32,
+              101,
+              113,
+              117,
+              105,
+              112,
+              111,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              34,
+              44,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              34,
+              78,
+              97,
+              116,
+              97,
+              108,
+              105,
+              97,
+              44,
+              32,
+              77,
+              105,
+              103,
+              117,
+              101,
+              108,
+              32,
+              121,
+              32,
+              74,
+              117,
+              97,
+              110,
+              32,
+              79,
+              115,
+              112,
+              105,
+              110,
+              97,
+              34,
+              44,
+              34,
+              105,
+              100,
+              34,
+              58,
+              56,
+              125,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 5,
+          "responseSize": 112
+        },
+        "id": "054c1adb-f722-4566-8ea8-b615d0dc3387",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          },
+          {
+            "assertion": "JSON válido",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "080ec0fd-9004-498a-9cb9-a8af164d99b0",
+          "length": 8,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "119e4e0d-6e81-4c0d-b6f6-a8cd3fdd86f0"
+        },
+        "item": {
+          "id": "9d1a43a3-61f6-4e7d-89c2-3422e10cd3b7",
+          "name": "03 Consultar libro creado",
+          "request": {
+            "url": {
+              "path": [
+                "books",
+                "{{book_id}}"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "b8474119-a1f6-474c-89a4-e1e0b4cada3f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('JSON válido', () => pm.response.to.be.json);",
+                  "pm.test('Autor correcto',()=>pm.expect(pm.response.json().book.author).to.eql('Natalia, Miguel y Juan Ospina'));"
+                ],
+                "_lastExecutionId": "f3af7e89-d246-4ac3-9c04-e5e45a101a31"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "5002",
+            "path": [
+              "books",
+              "8"
+            ],
+            "host": [
+              "192",
+              "168",
+              "100",
+              "3"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "2b7cead5-fa10-4462-b0b9-88bb8f0dc203",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "192.168.100.3:5002",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "8c10585a-6fc5-4073-adf9-0326be9fadc6",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 25 Sep 2026 01:31:28 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              98,
+              111,
+              111,
+              107,
+              34,
+              58,
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              56,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              76,
+              105,
+              98,
+              114,
+              111,
+              32,
+              100,
+              101,
+              32,
+              112,
+              114,
+              117,
+              101,
+              98,
+              97,
+              32,
+              100,
+              101,
+              108,
+              32,
+              101,
+              113,
+              117,
+              105,
+              112,
+              111,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              34,
+              44,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              34,
+              78,
+              97,
+              116,
+              97,
+              108,
+              105,
+              97,
+              44,
+              32,
+              77,
+              105,
+              103,
+              117,
+              101,
+              108,
+              32,
+              121,
+              32,
+              74,
+              117,
+              97,
+              110,
+              32,
+              79,
+              115,
+              112,
+              105,
+              110,
+              97,
+              34,
+              125,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 1,
+          "responseSize": 112
+        },
+        "id": "9d1a43a3-61f6-4e7d-89c2-3422e10cd3b7",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "JSON válido",
+            "skipped": false
+          },
+          {
+            "assertion": "Autor correcto",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "6064c1d3-8944-4a3a-8081-8abe7654a8c6",
+          "length": 8,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "ad80e080-908e-4c34-8bc2-57bd4513f542"
+        },
+        "item": {
+          "id": "5a89b184-2a7d-42dd-b708-f845e359aafd",
+          "name": "04 Actualizar libro",
+          "request": {
+            "url": {
+              "path": [
+                "books",
+                "{{book_id}}"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"description\": \"Actualizado mediante Postman\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "7ecdd59e-873c-417e-8866-9f36d6d85a96",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('JSON válido', () => pm.response.to.be.json);",
+                  "pm.test('Cambio guardado',()=>pm.expect(pm.response.json().book.description).to.eql('Actualizado mediante Postman'));"
+                ],
+                "_lastExecutionId": "3adcf6f1-666e-4627-896b-99b788eb7343"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "5002",
+            "path": [
+              "books",
+              "8"
+            ],
+            "host": [
+              "192",
+              "168",
+              "100",
+              "3"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "21040ba4-722e-45d4-a140-ecbc341356a7",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "192.168.100.3:5002",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "47",
+              "system": true
+            }
+          ],
+          "method": "PUT",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"description\": \"Actualizado mediante Postman\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "e460b536-1c3e-405b-93b9-b5263d09bbf8",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 25 Sep 2026 01:31:28 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              98,
+              111,
+              111,
+              107,
+              34,
+              58,
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              56,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              76,
+              105,
+              98,
+              114,
+              111,
+              32,
+              100,
+              101,
+              32,
+              112,
+              114,
+              117,
+              101,
+              98,
+              97,
+              32,
+              100,
+              101,
+              108,
+              32,
+              101,
+              113,
+              117,
+              105,
+              112,
+              111,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              65,
+              99,
+              116,
+              117,
+              97,
+              108,
+              105,
+              122,
+              97,
+              100,
+              111,
+              32,
+              109,
+              101,
+              100,
+              105,
+              97,
+              110,
+              116,
+              101,
+              32,
+              80,
+              111,
+              115,
+              116,
+              109,
+              97,
+              110,
+              34,
+              44,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              34,
+              78,
+              97,
+              116,
+              97,
+              108,
+              105,
+              97,
+              44,
+              32,
+              77,
+              105,
+              103,
+              117,
+              101,
+              108,
+              32,
+              121,
+              32,
+              74,
+              117,
+              97,
+              110,
+              32,
+              79,
+              115,
+              112,
+              105,
+              110,
+              97,
+              34,
+              125,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 4,
+          "responseSize": 140
+        },
+        "id": "5a89b184-2a7d-42dd-b708-f845e359aafd",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "JSON válido",
+            "skipped": false
+          },
+          {
+            "assertion": "Cambio guardado",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "56942f5d-0234-4cf9-abd8-77ad8ada3657",
+          "length": 8,
+          "cycles": 1,
+          "position": 4,
+          "iteration": 0,
+          "httpRequestId": "d9cdc4ae-1f8c-48f1-9af6-1ba621dc24ab"
+        },
+        "item": {
+          "id": "cfb3a65a-9a58-401d-81c8-35046ec4abe0",
+          "name": "05 Rechazar título vacío",
+          "request": {
+            "url": {
+              "path": [
+                "books"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "76429472-9870-45d3-a91d-5cd0ea22a475",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 400', () => pm.response.to.have.status(400));",
+                  "pm.test('JSON válido', () => pm.response.to.be.json);"
+                ],
+                "_lastExecutionId": "a24aacdc-d1e8-4ced-b9ae-3f14bbb71227"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "5002",
+            "path": [
+              "books"
+            ],
+            "host": [
+              "192",
+              "168",
+              "100",
+              "3"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "d283b8e1-12a1-4e0a-8521-97c1036fa754",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "192.168.100.3:5002",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "13",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": \"\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "1dc48f76-7a3c-436b-9397-bc91bd951307",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 25 Sep 2026 01:31:28 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              67,
+              97,
+              109,
+              112,
+              111,
+              115,
+              32,
+              105,
+              110,
+              118,
+              195,
+              161,
+              108,
+              105,
+              100,
+              111,
+              115,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 1,
+          "responseSize": 29
+        },
+        "id": "cfb3a65a-9a58-401d-81c8-35046ec4abe0",
+        "assertions": [
+          {
+            "assertion": "HTTP 400",
+            "skipped": false
+          },
+          {
+            "assertion": "JSON válido",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "235fead9-9382-4f64-85cc-412e045cb015",
+          "length": 8,
+          "cycles": 1,
+          "position": 5,
+          "iteration": 0,
+          "httpRequestId": "0c33d023-6ece-4d76-b920-0f86fb865629"
+        },
+        "item": {
+          "id": "9d7c66fd-1677-49c3-98da-317c4558a1a6",
+          "name": "06 Rechazar tipo incorrecto",
+          "request": {
+            "url": {
+              "path": [
+                "books"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": 123}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "6059f6b5-ed24-46b1-bdd3-955de72c0940",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 400', () => pm.response.to.have.status(400));",
+                  "pm.test('JSON válido', () => pm.response.to.be.json);"
+                ],
+                "_lastExecutionId": "32e19bf9-a65c-45d7-99f2-3e42db4f4a70"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "5002",
+            "path": [
+              "books"
+            ],
+            "host": [
+              "192",
+              "168",
+              "100",
+              "3"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "e633354b-a3f7-4b57-9c64-5b978cada575",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "192.168.100.3:5002",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "14",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": 123}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "2af0e2ae-8c7b-4da4-937b-7fa5455dec97",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 25 Sep 2026 01:31:28 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              67,
+              97,
+              109,
+              112,
+              111,
+              115,
+              32,
+              105,
+              110,
+              118,
+              195,
+              161,
+              108,
+              105,
+              100,
+              111,
+              115,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 1,
+          "responseSize": 29
+        },
+        "id": "9d7c66fd-1677-49c3-98da-317c4558a1a6",
+        "assertions": [
+          {
+            "assertion": "HTTP 400",
+            "skipped": false
+          },
+          {
+            "assertion": "JSON válido",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "c152f1ed-b756-4338-a9e5-ea5c3c4e3991",
+          "length": 8,
+          "cycles": 1,
+          "position": 6,
+          "iteration": 0,
+          "httpRequestId": "bca0e8e7-425e-4e35-96ff-f726cbcce3f1"
+        },
+        "item": {
+          "id": "7b27e8f8-a2af-4cf0-b4ab-0e1a0604cd73",
+          "name": "07 Eliminar libro de prueba",
+          "request": {
+            "url": {
+              "path": [
+                "books",
+                "{{book_id}}"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "c4aa1332-7ca1-42f5-bdbb-042215083675",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "pm.test('JSON válido', () => pm.response.to.be.json);",
+                  "pm.test('Eliminado',()=>pm.expect(pm.response.json().result).to.eql(true));"
+                ],
+                "_lastExecutionId": "674c2b3e-7950-4303-8b6a-a611553b93f2"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "5002",
+            "path": [
+              "books",
+              "8"
+            ],
+            "host": [
+              "192",
+              "168",
+              "100",
+              "3"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "28249d2e-724d-4120-b4d8-3a85f7cb0d90",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "192.168.100.3:5002",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "7875a23b-0cb8-4826-9448-54c18477b534",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 25 Sep 2026 01:31:28 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              114,
+              101,
+              115,
+              117,
+              108,
+              116,
+              34,
+              58,
+              116,
+              114,
+              117,
+              101,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 2,
+          "responseSize": 15
+        },
+        "id": "7b27e8f8-a2af-4cf0-b4ab-0e1a0604cd73",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "JSON válido",
+            "skipped": false
+          },
+          {
+            "assertion": "Eliminado",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "de5ced40-9668-493b-99bd-c644f0707b1b",
+          "length": 8,
+          "cycles": 1,
+          "position": 7,
+          "iteration": 0,
+          "httpRequestId": "16e604ff-1052-4435-ab29-4fb1bb797c3e"
+        },
+        "item": {
+          "id": "b7c669d3-60a0-431b-94e8-05793a773d8b",
+          "name": "08 Confirmar ausencia",
+          "request": {
+            "url": {
+              "path": [
+                "books",
+                "{{book_id}}"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "504b9607-b785-44b0-811e-4d77cc19d90b",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 404', () => pm.response.to.have.status(404));",
+                  "pm.test('JSON válido', () => pm.response.to.be.json);"
+                ],
+                "_lastExecutionId": "7ac80b9c-465c-4104-91e7-718079223980"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "5002",
+            "path": [
+              "books",
+              "8"
+            ],
+            "host": [
+              "192",
+              "168",
+              "100",
+              "3"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "a143d1c6-829a-462d-9a07-3f0d8554a510",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "192.168.100.3:5002",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "6c67a82c-fdd2-4538-9a5d-fc76bd59ae37",
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 25 Sep 2026 01:31:28 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              76,
+              105,
+              98,
+              114,
+              111,
+              32,
+              110,
+              111,
+              32,
+              101,
+              110,
+              99,
+              111,
+              110,
+              116,
+              114,
+              97,
+              100,
+              111,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 1,
+          "responseSize": 31
+        },
+        "id": "b7c669d3-60a0-431b-94e8-05793a773d8b",
+        "assertions": [
+          {
+            "assertion": "HTTP 404",
+            "skipped": false
+          },
+          {
+            "assertion": "JSON válido",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 652
+    },
+    "failures": [],
+    "error": null
+  }
+}

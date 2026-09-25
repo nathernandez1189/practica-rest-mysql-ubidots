@@ -1,0 +1,46 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-8.4.2, pluggy-1.6.0 -- /home/vagrant/practica-rest-equipo/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/vagrant/practica-rest-equipo
+configfile: pytest.ini
+testpaths: tests
+collecting ... collected 35 items
+
+tests/test_api.py::test_crud PASSED                                      [  2%]
+tests/test_api.py::test_invalid_create[None] PASSED                      [  5%]
+tests/test_api.py::test_invalid_create[payload1] PASSED                  [  8%]
+tests/test_api.py::test_invalid_create[payload2] PASSED                  [ 11%]
+tests/test_api.py::test_invalid_create[payload3] PASSED                  [ 14%]
+tests/test_api.py::test_invalid_create[payload4] PASSED                  [ 17%]
+tests/test_api.py::test_invalid_create[payload5] PASSED                  [ 20%]
+tests/test_api.py::test_invalid_create[payload6] PASSED                  [ 22%]
+tests/test_api.py::test_invalid_create[payload7] PASSED                  [ 25%]
+tests/test_api.py::test_invalid_create[payload8] PASSED                  [ 28%]
+tests/test_api.py::test_invalid_create[payload9] PASSED                  [ 31%]
+tests/test_api.py::test_missing[get] PASSED                              [ 34%]
+tests/test_api.py::test_missing[put] PASSED                              [ 37%]
+tests/test_api.py::test_missing[delete] PASSED                           [ 40%]
+tests/test_api.py::test_delete_all_and_create PASSED                     [ 42%]
+tests/test_api.py::test_ids_not_reused PASSED                            [ 45%]
+tests/test_api.py::test_sql_string_is_data PASSED                        [ 48%]
+tests/test_api.py::test_memory_restart PASSED                            [ 51%]
+tests/test_api.py::test_malformed_json PASSED                            [ 54%]
+tests/test_api.py::test_unknown_route_json PASSED                        [ 57%]
+tests/test_api.py::test_reject_empty_update PASSED                       [ 60%]
+tests/test_api.py::test_health PASSED                                    [ 62%]
+tests/test_mysql_failure.py::test_database_unavailable_returns_503_without_details PASSED [ 65%]
+tests/test_ubidots.py::test_five_variables PASSED                        [ 68%]
+tests/test_ubidots.py::test_request_contract PASSED                      [ 71%]
+tests/test_ubidots.py::test_reject_http_errors[301] PASSED               [ 74%]
+tests/test_ubidots.py::test_reject_http_errors[400] PASSED               [ 77%]
+tests/test_ubidots.py::test_reject_http_errors[401] PASSED               [ 80%]
+tests/test_ubidots.py::test_reject_http_errors[403] PASSED               [ 82%]
+tests/test_ubidots.py::test_reject_http_errors[429] PASSED               [ 85%]
+tests/test_ubidots.py::test_reject_http_errors[500] PASSED               [ 88%]
+tests/test_ubidots.py::test_reject_partial_failure PASSED                [ 91%]
+tests/test_ubidots.py::test_no_token_to_untrusted_destination[http://industrial.api.ubidots.com] PASSED [ 94%]
+tests/test_ubidots.py::test_no_token_to_untrusted_destination[https://example.com] PASSED [ 97%]
+tests/test_ubidots.py::test_invalid_device PASSED                        [100%]
+
+- generated xml file: /home/vagrant/practica-rest-equipo/evidencias/pytest.xml -
+============================== 35 passed in 0.14s ==============================
