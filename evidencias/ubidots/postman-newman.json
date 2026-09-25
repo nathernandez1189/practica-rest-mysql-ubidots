@@ -1,0 +1,1318 @@
+{
+  "collection": {
+    "item": [
+      {
+        "id": "b3fff5d9-1aa1-4046-9fc3-89775ae70ce6",
+        "name": "Enviar cinco variables a Ubidots",
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v1.6",
+              "devices",
+              "{{device}}",
+              ""
+            ],
+            "host": [
+              "industrial",
+              "api",
+              "ubidots",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-Auth-Token",
+              "value": "{{ubidots_token}}"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"temperature\": 24, \"humidity\": 65, \"position\": {\"value\": 1, \"context\": {\"lat\": 4.711, \"lng\": -74.0721}}, \"luminosity\": 550, \"pressure\": 750}"
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "33410cc1-8a6c-47fe-94ad-cad8ab55c9d6",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP correcto',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                "var ubiResponse=pm.response.json();",
+                "for(const key of ['temperature','humidity','position','luminosity','pressure']) pm.test('Recepción '+key,()=>pm.expect(ubiResponse[key][0].status_code).to.eql(201));"
+              ],
+              "_lastExecutionId": "881a097b-63f6-4904-b2ec-5138e5e48552"
+            }
+          }
+        ]
+      },
+      {
+        "id": "fc283b96-b672-4bd1-a5e5-ea9e3cabd7c3",
+        "name": "Consultar y comprobar los cinco valores recibidos",
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v2.0",
+              "devices",
+              "~{{device}}",
+              "_",
+              "values",
+              "last"
+            ],
+            "host": [
+              "industrial",
+              "api",
+              "ubidots",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-Auth-Token",
+              "value": "{{ubidots_token}}"
+            }
+          ],
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "5112f378-d3be-48b7-9154-d4d125eab6d8",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('Lectura HTTP 200',()=>pm.response.to.have.status(200));",
+                "const values=pm.response.json();",
+                "for(const [key,value] of Object.entries({temperature:24,humidity:65,luminosity:550,pressure:750})) pm.test('Valor guardado '+key,()=>pm.expect(values[key].value).to.eql(value));",
+                "pm.test('Posición guardada',()=>{pm.expect(values.position.context.lat).to.eql(4.711);pm.expect(values.position.context.lng).to.eql(-74.0721);});"
+              ],
+              "_lastExecutionId": "578610dd-5fb9-41f4-a0e4-9e667387e700"
+            }
+          }
+        ]
+      }
+    ],
+    "event": [],
+    "variable": [
+      {
+        "type": "any",
+        "value": "equipo-rest",
+        "key": "device"
+      }
+    ],
+    "info": {
+      "_postman_id": "2ffb064d-531e-47d6-b5d8-058cee0c51f0",
+      "name": "Ubidots | cinco variables",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "id": "8d271202-5b00-4687-8260-f0798764942a",
+    "name": "Local privado",
+    "values": [
+      {
+        "type": "any",
+        "value": "[TOKEN OCULTO]",
+        "key": "ubidots_token"
+      }
+    ]
+  },
+  "globals": {
+    "id": "07f15402-8d3a-4a33-a009-1c828d88819c",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 12,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 262.5,
+      "responseMin": 148,
+      "responseMax": 377,
+      "responseSd": 114.5,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1790301420886,
+      "completed": 1790301423862
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 2,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "3a4e261e-948a-4eb8-ba0d-4d803f7bd2c6",
+          "httpRequestId": "8478fd9d-12f2-42d6-9e87-0956d1835560"
+        },
+        "item": {
+          "id": "b3fff5d9-1aa1-4046-9fc3-89775ae70ce6",
+          "name": "Enviar cinco variables a Ubidots",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v1.6",
+                "devices",
+                "{{device}}",
+                ""
+              ],
+              "host": [
+                "industrial",
+                "api",
+                "ubidots",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "X-Auth-Token",
+                "value": "{{ubidots_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"temperature\": 24, \"humidity\": 65, \"position\": {\"value\": 1, \"context\": {\"lat\": 4.711, \"lng\": -74.0721}}, \"luminosity\": 550, \"pressure\": 750}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "33410cc1-8a6c-47fe-94ad-cad8ab55c9d6",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP correcto',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+                  "var ubiResponse=pm.response.json();",
+                  "for(const key of ['temperature','humidity','position','luminosity','pressure']) pm.test('Recepción '+key,()=>pm.expect(ubiResponse[key][0].status_code).to.eql(201));"
+                ],
+                "_lastExecutionId": "881a097b-63f6-4904-b2ec-5138e5e48552"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v1.6",
+              "devices",
+              "equipo-rest",
+              ""
+            ],
+            "host": [
+              "industrial",
+              "api",
+              "ubidots",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-Auth-Token",
+              "value": "[TOKEN OCULTO]"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "60e729ab-6896-4e65-a535-c2c046981b42",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "industrial.api.ubidots.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "141",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"temperature\": 24, \"humidity\": 65, \"position\": {\"value\": 1, \"context\": {\"lat\": 4.711, \"lng\": -74.0721}}, \"luminosity\": 550, \"pressure\": 750}"
+          }
+        },
+        "response": {
+          "id": "27e0ecc1-a958-4c67-875f-7d716f4860f9",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "date",
+              "value": "Fri, 25 Sep 2026 01:57:02 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "server",
+              "value": "IoTServer"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              104,
+              117,
+              109,
+              105,
+              100,
+              105,
+              116,
+              121,
+              34,
+              58,
+              91,
+              123,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              95,
+              99,
+              111,
+              100,
+              101,
+              34,
+              58,
+              50,
+              48,
+              49,
+              125,
+              93,
+              44,
+              34,
+              108,
+              117,
+              109,
+              105,
+              110,
+              111,
+              115,
+              105,
+              116,
+              121,
+              34,
+              58,
+              91,
+              123,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              95,
+              99,
+              111,
+              100,
+              101,
+              34,
+              58,
+              50,
+              48,
+              49,
+              125,
+              93,
+              44,
+              34,
+              112,
+              111,
+              115,
+              105,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              91,
+              123,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              95,
+              99,
+              111,
+              100,
+              101,
+              34,
+              58,
+              50,
+              48,
+              49,
+              125,
+              93,
+              44,
+              34,
+              112,
+              114,
+              101,
+              115,
+              115,
+              117,
+              114,
+              101,
+              34,
+              58,
+              91,
+              123,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              95,
+              99,
+              111,
+              100,
+              101,
+              34,
+              58,
+              50,
+              48,
+              49,
+              125,
+              93,
+              44,
+              34,
+              116,
+              101,
+              109,
+              112,
+              101,
+              114,
+              97,
+              116,
+              117,
+              114,
+              101,
+              34,
+              58,
+              91,
+              123,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              95,
+              99,
+              111,
+              100,
+              101,
+              34,
+              58,
+              50,
+              48,
+              49,
+              125,
+              93,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 377,
+          "responseSize": 171
+        },
+        "id": "b3fff5d9-1aa1-4046-9fc3-89775ae70ce6",
+        "assertions": [
+          {
+            "assertion": "HTTP correcto",
+            "skipped": false
+          },
+          {
+            "assertion": "Recepción temperature",
+            "skipped": false
+          },
+          {
+            "assertion": "Recepción humidity",
+            "skipped": false
+          },
+          {
+            "assertion": "Recepción position",
+            "skipped": false
+          },
+          {
+            "assertion": "Recepción luminosity",
+            "skipped": false
+          },
+          {
+            "assertion": "Recepción pressure",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "6af73fc5-8ee5-48e9-a7ad-200cf64ed1e8",
+          "length": 2,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "69d49a97-cd81-4ad8-b643-6cd38057fa6f"
+        },
+        "item": {
+          "id": "fc283b96-b672-4bd1-a5e5-ea9e3cabd7c3",
+          "name": "Consultar y comprobar los cinco valores recibidos",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "path": [
+                "api",
+                "v2.0",
+                "devices",
+                "~{{device}}",
+                "_",
+                "values",
+                "last"
+              ],
+              "host": [
+                "industrial",
+                "api",
+                "ubidots",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "X-Auth-Token",
+                "value": "{{ubidots_token}}"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5112f378-d3be-48b7-9154-d4d125eab6d8",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Lectura HTTP 200',()=>pm.response.to.have.status(200));",
+                  "const values=pm.response.json();",
+                  "for(const [key,value] of Object.entries({temperature:24,humidity:65,luminosity:550,pressure:750})) pm.test('Valor guardado '+key,()=>pm.expect(values[key].value).to.eql(value));",
+                  "pm.test('Posición guardada',()=>{pm.expect(values.position.context.lat).to.eql(4.711);pm.expect(values.position.context.lng).to.eql(-74.0721);});"
+                ],
+                "_lastExecutionId": "578610dd-5fb9-41f4-a0e4-9e667387e700"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "api",
+              "v2.0",
+              "devices",
+              "~equipo-rest",
+              "_",
+              "values",
+              "last"
+            ],
+            "host": [
+              "industrial",
+              "api",
+              "ubidots",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-Auth-Token",
+              "value": "[TOKEN OCULTO]"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "ba1f1494-47f3-4f6a-984b-c9040f0878a6",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "industrial.api.ubidots.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "952c3129-223a-4782-b2ba-8b3ff3cf3d2a",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "date",
+              "value": "Fri, 25 Sep 2026 01:57:03 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "transfer-encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "server",
+              "value": "IoTServer"
+            },
+            {
+              "key": "allow",
+              "value": "GET, HEAD, OPTIONS"
+            },
+            {
+              "key": "vary",
+              "value": "Authorization, origin, Cookie"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              116,
+              101,
+              109,
+              112,
+              101,
+              114,
+              97,
+              116,
+              117,
+              114,
+              101,
+              34,
+              58,
+              32,
+              123,
+              34,
+              118,
+              97,
+              108,
+              117,
+              101,
+              34,
+              58,
+              32,
+              50,
+              52,
+              46,
+              48,
+              44,
+              32,
+              34,
+              116,
+              105,
+              109,
+              101,
+              115,
+              116,
+              97,
+              109,
+              112,
+              34,
+              58,
+              32,
+              49,
+              55,
+              57,
+              48,
+              51,
+              48,
+              49,
+              52,
+              50,
+              50,
+              53,
+              56,
+              50,
+              44,
+              32,
+              34,
+              99,
+              111,
+              110,
+              116,
+              101,
+              120,
+              116,
+              34,
+              58,
+              32,
+              123,
+              125,
+              44,
+              32,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              32,
+              49,
+              55,
+              57,
+              48,
+              51,
+              48,
+              49,
+              52,
+              50,
+              50,
+              53,
+              56,
+              50,
+              125,
+              44,
+              32,
+              34,
+              112,
+              114,
+              101,
+              115,
+              115,
+              117,
+              114,
+              101,
+              34,
+              58,
+              32,
+              123,
+              34,
+              118,
+              97,
+              108,
+              117,
+              101,
+              34,
+              58,
+              32,
+              55,
+              53,
+              48,
+              46,
+              48,
+              44,
+              32,
+              34,
+              116,
+              105,
+              109,
+              101,
+              115,
+              116,
+              97,
+              109,
+              112,
+              34,
+              58,
+              32,
+              49,
+              55,
+              57,
+              48,
+              51,
+              48,
+              49,
+              52,
+              50,
+              50,
+              53,
+              56,
+              50,
+              44,
+              32,
+              34,
+              99,
+              111,
+              110,
+              116,
+              101,
+              120,
+              116,
+              34,
+              58,
+              32,
+              123,
+              125,
+              44,
+              32,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              32,
+              49,
+              55,
+              57,
+              48,
+              51,
+              48,
+              49,
+              52,
+              50,
+              50,
+              53,
+              56,
+              50,
+              125,
+              44,
+              32,
+              34,
+              112,
+              111,
+              115,
+              105,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              32,
+              123,
+              34,
+              118,
+              97,
+              108,
+              117,
+              101,
+              34,
+              58,
+              32,
+              49,
+              46,
+              48,
+              44,
+              32,
+              34,
+              116,
+              105,
+              109,
+              101,
+              115,
+              116,
+              97,
+              109,
+              112,
+              34,
+              58,
+              32,
+              49,
+              55,
+              57,
+              48,
+              51,
+              48,
+              49,
+              52,
+              50,
+              50,
+              53,
+              56,
+              50,
+              44,
+              32,
+              34,
+              99,
+              111,
+              110,
+              116,
+              101,
+              120,
+              116,
+              34,
+              58,
+              32,
+              123,
+              34,
+              108,
+              97,
+              116,
+              34,
+              58,
+              32,
+              52,
+              46,
+              55,
+              49,
+              49,
+              44,
+              32,
+              34,
+              108,
+              110,
+              103,
+              34,
+              58,
+              32,
+              45,
+              55,
+              52,
+              46,
+              48,
+              55,
+              50,
+              49,
+              125,
+              44,
+              32,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              32,
+              49,
+              55,
+              57,
+              48,
+              51,
+              48,
+              49,
+              52,
+              50,
+              50,
+              53,
+              56,
+              50,
+              125,
+              44,
+              32,
+              34,
+              108,
+              117,
+              109,
+              105,
+              110,
+              111,
+              115,
+              105,
+              116,
+              121,
+              34,
+              58,
+              32,
+              123,
+              34,
+              118,
+              97,
+              108,
+              117,
+              101,
+              34,
+              58,
+              32,
+              53,
+              53,
+              48,
+              46,
+              48,
+              44,
+              32,
+              34,
+              116,
+              105,
+              109,
+              101,
+              115,
+              116,
+              97,
+              109,
+              112,
+              34,
+              58,
+              32,
+              49,
+              55,
+              57,
+              48,
+              51,
+              48,
+              49,
+              52,
+              50,
+              50,
+              53,
+              56,
+              50,
+              44,
+              32,
+              34,
+              99,
+              111,
+              110,
+              116,
+              101,
+              120,
+              116,
+              34,
+              58,
+              32,
+              123,
+              125,
+              44,
+              32,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              32,
+              49,
+              55,
+              57,
+              48,
+              51,
+              48,
+              49,
+              52,
+              50,
+              50,
+              53,
+              56,
+              50,
+              125,
+              44,
+              32,
+              34,
+              104,
+              117,
+              109,
+              105,
+              100,
+              105,
+              116,
+              121,
+              34,
+              58,
+              32,
+              123,
+              34,
+              118,
+              97,
+              108,
+              117,
+              101,
+              34,
+              58,
+              32,
+              54,
+              53,
+              46,
+              48,
+              44,
+              32,
+              34,
+              116,
+              105,
+              109,
+              101,
+              115,
+              116,
+              97,
+              109,
+              112,
+              34,
+              58,
+              32,
+              49,
+              55,
+              57,
+              48,
+              51,
+              48,
+              49,
+              52,
+              50,
+              50,
+              53,
+              56,
+              50,
+              44,
+              32,
+              34,
+              99,
+              111,
+              110,
+              116,
+              101,
+              120,
+              116,
+              34,
+              58,
+              32,
+              123,
+              125,
+              44,
+              32,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              95,
+              97,
+              116,
+              34,
+              58,
+              32,
+              49,
+              55,
+              57,
+              48,
+              51,
+              48,
+              49,
+              52,
+              50,
+              50,
+              53,
+              56,
+              50,
+              125,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 148,
+          "responseSize": 540
+        },
+        "id": "fc283b96-b672-4bd1-a5e5-ea9e3cabd7c3",
+        "assertions": [
+          {
+            "assertion": "Lectura HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Valor guardado temperature",
+            "skipped": false
+          },
+          {
+            "assertion": "Valor guardado humidity",
+            "skipped": false
+          },
+          {
+            "assertion": "Valor guardado luminosity",
+            "skipped": false
+          },
+          {
+            "assertion": "Valor guardado pressure",
+            "skipped": false
+          },
+          {
+            "assertion": "Posición guardada",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 711
+    },
+    "failures": [],
+    "error": null
+  }
+}

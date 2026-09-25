@@ -1,0 +1,99 @@
+{
+  "url": "https://industrial.api.ubidots.com/api/v2.0/events/6ab5d63983324fe7ed3dd57c",
+  "id": "6ab5d63983324fe7ed3dd57c",
+  "label": "prctica-rest.-temperatura-30-c",
+  "name": "Practica REST - temperatura > 30 C",
+  "description": "Equipo: Natalia Hernandez, Miguel Angel Diuza y Juan Ospina. Sensor simulado equipo-rest/temperature. Un correo por cruce del umbral; sin repeticion periodica.",
+  "tags": [],
+  "organization": null,
+  "isActive": true,
+  "lastTriggered": 1790302083254,
+  "createdAt": "2026-09-25T02:02:33.506637Z",
+  "triggers": [
+    [
+      {
+        "type": "last_value",
+        "condition": {
+          "type": "value",
+          "value": 30.0,
+          "operator": ">",
+          "delay": 0.0
+        },
+        "entity": {
+          "type": "variable",
+          "value": [
+            {
+              "id": "6ab5d3a78a1dfda3acb57c07"
+            }
+          ],
+          "operator": "or"
+        }
+      }
+    ]
+  ],
+  "actions": [
+    {
+      "type": "email",
+      "name": "Send Email",
+      "data": {
+        "emails": [
+          "[CORREO OCULTO]"
+        ],
+        "message": "Prueba academica de Natalia Hernandez, Miguel Angel Diuza y Juan Ospina. El sensor simulado temperature de equipo-rest supero 30 grados Celsius. Esta alerta valida el flujo API REST, evento y correo de Ubidots. No corresponde a una emergencia real.",
+        "subject": "Practica REST - Alerta de temperatura del equipo"
+      },
+      "back_to_normal": false,
+      "idGroupAction": "EJOMMg3"
+    }
+  ],
+  "activeDates": {
+    "dates": [
+      [
+        [
+          "00:00",
+          "23:59"
+        ]
+      ],
+      [
+        [
+          "00:00",
+          "23:59"
+        ]
+      ],
+      [
+        [
+          "00:00",
+          "23:59"
+        ]
+      ],
+      [
+        [
+          "00:00",
+          "23:59"
+        ]
+      ],
+      [
+        [
+          "00:00",
+          "23:59"
+        ]
+      ],
+      [
+        [
+          "00:00",
+          "23:59"
+        ]
+      ],
+      [
+        [
+          "00:00",
+          "23:59"
+        ]
+      ]
+    ],
+    "timezone": "America/Bogota"
+  },
+  "isGlobalEvent": false,
+  "cooldownPeriod": 1,
+  "retriggerWhileActive": false
+}

@@ -1,0 +1,100 @@
+cabecera Monitoring, Value: 2
+								54 texto Monitoring
+							55 grupo de pestañas Monitoring
+								56 tab (settable, integer) Events, Value: 0
+									57 texto Events
+								58 tab (selected) Logs, Value: 1
+									59 texto Logs
+							60 container Logs
+								61 container
+									62 cabecera 4 Logs, Value: 3
+										63 texto 4 Logs
+									64 botón
+									65 container
+										66 campo de texto (settable) Search logs
+									67 botón emergente
+									68 tabla
+										69 row
+											70 encabezado de columna
+												71 texto Type
+											72 encabezado de columna
+												73 texto Event
+											74 encabezado de columna
+												75 texto Created at
+											76 encabezado de columna
+												77 texto Message
+											78 encabezado de columna
+												79 texto Status
+											80 encabezado de columna
+												81 texto Organization
+											82 encabezado de columna
+												83 botón emergente
+													84 botón
+										85 row
+											86 celda
+											87 celda
+												88 texto Practica REST - temperatura > 30 C
+											89 celda
+												90 texto 2026-09-24 21:08:37
+											91 celda
+												92 texto Event "Practica REST - temperatura > 30 C" updated
+											93 celda
+												94 texto -
+											95 celda
+												96 texto -
+											97 celda
+												98 botón
+										99 row
+											100 celda
+											101 celda
+												102 texto Practica REST - temperatura > 30 C
+											103 celda
+												104 texto 2026-09-24 21:08:03
+											105 celda
+												106 texto Email sent to [CORREO INSTITUCIONAL AUTORIZADO]
+											107 celda
+												108 texto Sent
+											109 celda
+												110 texto -
+											111 celda
+												112 botón
+										113 row
+											114 celda
+											115 celda
+												116 texto Practica REST - temperatura > 30 C
+											117 celda
+												118 texto 2026-09-24 21:04:04
+											119 celda
+												120 texto Event "Practica REST - temperatura > 30 C" updated
+											121 celda
+												122 texto -
+											123 celda
+												124 texto -
+											125 celda
+												126 botón
+										127 row
+											128 celda
+											129 celda
+												130 texto Practica REST - temperatura > 30 C
+											131 celda
+												132 texto 2026-09-24 21:02:33
+											133 celda
+												134 texto Event "Prctica REST. ·temperatura > 30 °C" created
+											135 celda
+												136 texto -
+											137 celda
+												138 texto -
+											139 celda
+												140 botón
+									141 texto LOGS PER PAGE
+									142 botón emergente 10
+									143 container pagination info
+										144 container from number value
+											145 texto 1
+										146 texto -
+										147 container to number value
+											148 texto 10
+										149 container total table number value
+									150 botón (disabled) show previous page
+									151 botón (disabled) show next page
+			152 

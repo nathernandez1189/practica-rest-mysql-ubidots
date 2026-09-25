@@ -1,0 +1,11 @@
+Ejecución UTC: 2026-09-25T01:51:48.700203+00:00
+{"temperature": 21.5, "humidity": 81.4, "position": {"value": 1, "context": {"lat": 4.712426, "lng": -74.070481}}, "luminosity": 393, "pressure": 753.9}
+HTTP 200: {"humidity": [{"status_code": 201}], "luminosity": [{"status_code": 201}], "position": [{"status_code": 201}], "pressure": [{"status_code": 201}], "temperature": [{"status_code": 201}]}
+{"temperature": 27.4, "humidity": 35.6, "position": {"value": 1, "context": {"lat": 4.709801, "lng": -74.070765}}, "luminosity": 107, "pressure": 754.3}
+HTTP 200: {"humidity": [{"status_code": 201}], "luminosity": [{"status_code": 201}], "position": [{"status_code": 201}], "pressure": [{"status_code": 201}], "temperature": [{"status_code": 201}]}
+{"temperature": 34.4, "humidity": 60.2, "position": {"value": 1, "context": {"lat": 4.712293, "lng": -74.073015}}, "luminosity": 607, "pressure": 746.3}
+HTTP 200: {"humidity": [{"status_code": 201}], "luminosity": [{"status_code": 201}], "position": [{"status_code": 201}], "pressure": [{"status_code": 201}], "temperature": [{"status_code": 201}]}
+{"temperature": 19.4, "humidity": 42.6, "position": {"value": 1, "context": {"lat": 4.711872, "lng": -74.071608}}, "luminosity": 392, "pressure": 746.4}
+HTTP 200: {"humidity": [{"status_code": 201}], "luminosity": [{"status_code": 201}], "position": [{"status_code": 201}], "pressure": [{"status_code": 201}], "temperature": [{"status_code": 201}]}
+{"temperature": 29.3, "humidity": 79.0, "position": {"value": 1, "context": {"lat": 4.709721, "lng": -74.073974}}, "luminosity": 829, "pressure": 749.6}
+HTTP 200: {"humidity": [{"status_code": 201}], "luminosity": [{"status_code": 201}], "position": [{"status_code": 201}], "pressure": [{"status_code": 201}], "temperature": [{"status_code": 201}]}

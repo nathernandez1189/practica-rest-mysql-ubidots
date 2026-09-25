@@ -35,7 +35,35 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test('Recepci\u00f3n HTTP',()=>pm.expect(pm.response.code).to.be.within(200,299));"
+              "pm.test('HTTP correcto',()=>pm.expect(pm.response.code).to.be.within(200,299));",
+              "var ubiResponse=pm.response.json();",
+              "for(const key of ['temperature','humidity','position','luminosity','pressure']) pm.test('Recepción '+key,()=>pm.expect(ubiResponse[key][0].status_code).to.eql(201));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Consultar y comprobar los cinco valores recibidos",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Auth-Token",
+            "value": "{{ubidots_token}}"
+          }
+        ],
+        "url": "https://industrial.api.ubidots.com/api/v2.0/devices/~{{device}}/_/values/last"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Lectura HTTP 200',()=>pm.response.to.have.status(200));",
+              "const values=pm.response.json();",
+              "for(const [key,value] of Object.entries({temperature:24,humidity:65,luminosity:550,pressure:750})) pm.test('Valor guardado '+key,()=>pm.expect(values[key].value).to.eql(value));",
+              "pm.test('Posición guardada',()=>{pm.expect(values.position.context.lat).to.eql(4.711);pm.expect(values.position.context.lng).to.eql(-74.0721);});"
             ]
           }
         }

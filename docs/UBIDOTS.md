@@ -1,10 +1,16 @@
-# Ubidots: conexión y verificación pendiente de cuenta
+# Ubidots: ejecución real y reproducción
 
-**Estado de esta entrega:** el simulador y su contrato HTTP tienen pruebas locales. La recepción en Ubidots, el dashboard y el correo no se pueden certificar hasta configurar una cuenta real. Ningún resultado de simulación local demuestra recepción en la nube.
+**Estado verificado:** cuenta STEM operativa, dispositivo `equipo-rest`, cinco variables recibidas desde Python/curl/Postman y cinco widgets funcionando. Newman completó 12 aserciones sin fallos. El evento envió el correo y registró éxito a las 21:08:03 del 24 de septiembre de 2026 (Colombia). **La recepción en la bandeja institucional aún no se ha inspeccionado.**
+
+- [Evidencias originales y alcance](../evidencias/ubidots/README.md).
+- [Dashboard del equipo](https://stem.ubidots.com/app/dashboards/6ab5d3c8d1003b3265a230eb), requiere iniciar sesión con la cuenta del equipo. El profesor puede revisar las capturas públicas sin acceder a esa cuenta.
+- [Dispositivo](https://stem.ubidots.com/app/devices/6ab5d3a6e011e9a497bbcb99).
+
+Los pasos siguientes permiten reproducir lo realizado con un token propio.
 
 ## 1. Cuenta y token
 
-Crear una cuenta educativa en https://ubidots.com/stem, confirmar el correo e iniciar sesión. Guardar el token únicamente en el entorno local. No subirlo al repositorio ni incluirlo en capturas. En bash:
+Para reproducir desde otra cuenta, registrarse en https://ubidots.com/stem, confirmar el correo e iniciar sesión. Guardar el token únicamente en el entorno local. No subirlo al repositorio ni incluirlo en capturas. En bash:
 
 ```bash
 read -rsp 'Token de Ubidots: ' UBIDOTS_TOKEN; echo
@@ -39,27 +45,44 @@ Las coordenadas son ficticias, alrededor de Bogotá; no corresponden a la ubicac
 bash scripts/ubidots_curl.sh
 ```
 
-En Postman importar `postman/Ubidots.postman_collection.json`; crear la variable secreta local `ubidots_token` y establecer `device=equipo-rest`. No sincronizar ni exportar valores del token. Ejecutar el envío y revisar también los códigos internos por variable en la respuesta; un HTTP 200 por sí solo no basta para descartar fallos parciales.
+En Postman importar `postman/Ubidots.postman_collection.json`; crear la variable secreta local `ubidots_token` y establecer `device=equipo-rest`. No sincronizar ni exportar valores del token. Ejecutar las dos peticiones de la colección: POST de cinco variables y GET para comprobar los valores guardados. Las 12 aserciones revisan HTTP, los códigos internos 201 y la lectura de datos y coordenadas; HTTP 200 por sí solo no descarta fallos parciales. La ejecución real con Newman usó un entorno privado, excluido del repositorio, y validación TLS activa.
 
 ## 4. Dashboard
 
-Crear un dashboard llamado **Práctica REST - Natalia, Miguel y Juan Ospina**. Agregar los cinco widgets de la tabla y seleccionar el dispositivo `equipo-rest`. Ejecutar cinco envíos; observar que cambian los valores y las marcas de tiempo. Guardar una captura completa sin mostrar tokens.
+Se creó el dashboard **Práctica REST · Natalia, Miguel y Juan Ospina** con los cinco widgets de la tabla. Humedad usa escala 0–100. La posición ficticia se recibe en `position.context.lat/lng` y aparece sobre Bogotá. Se amplió la gráfica de presión y se seleccionó la última hora para apreciar los cambios.
+
+Las capturas [07](../evidencias/pantallazos/07-ubidots-alerta-34.png) y [08](../evidencias/pantallazos/08-ubidots-recuperacion-24.png) registran temperatura 34→24, humedad 78→65, luminosidad 820→550 y presión 754→750. La segunda muestra se reflejó automáticamente en el tablero. Se restauró el valor normal y se detuvieron los envíos al concluir.
 
 ## 5. Evento y correo
 
-Crear un evento para `temperature > 30` con acción de correo hacia la cuenta indicada por el integrante. Activarlo solo durante la prueba. Enviar primero temperatura 24 y después 34 para demostrar el cruce de umbral. Verificar el registro de ejecución y el correo recibido, y guardar capturas sin datos privados innecesarios. Acordar previamente con el titular el destinatario y el envío de este correo de prueba. Desactivar el evento al terminar si no se desea recibir más avisos.
+Evento guardado: **Practica REST - temperatura > 30 C**, condición `temperature > 30`, demora cero, ventana diaria y zona `America/Bogota`. La acción email usa el correo institucional autorizado por Natalia. La repetición periódica está desactivada y el evento permanece activo. La dirección y el token se ocultan en el repositorio.
 
-## 6. Evidencias para cerrar esta parte
+Prueba controlada reproducible (el segundo comando puede enviar un correo al destinatario configurado):
+
+```bash
+python scripts/verify_ubidots.py normal --output evidencias/ubidots/normal-24.json
+python scripts/verify_ubidots.py alerta --output evidencias/ubidots/alerta-34.json
+python scripts/verify_ubidots.py recuperacion --output evidencias/ubidots/recuperacion-24.json
+```
+
+Esperar a observar el tablero entre etapas. Cada comando valida los códigos internos de recepción y consulta los últimos valores hasta comprobar que coinciden. El flujo fue 24→34→24 °C. En Monitoring → Logs apareció **Sent**; el registro oficial contiene `successful_execution: true`. El asunto vigente es **Practica REST - Alerta de temperatura del equipo**. La primera prueba se envió antes de una corrección ortográfica del asunto, como consta en el registro histórico.
+
+Para cerrar el último requisito, abrir el correo institucional, buscar la alerta de Ubidots (también en correo no deseado) y guardar evidencia del mensaje recibido sin publicar otros correos o datos privados. Hasta observarlo, el estado de recepción permanece pendiente.
+
+## 6. Evidencias guardadas
 
 - Respuesta real del envío Python con éxito por variable.
 - Respuesta real del envío curl y Postman.
 - Dispositivo con cinco variables y marcas de tiempo.
 - Dashboard con gauge, mapa, barras y dos widgets adicionales.
-- Configuración del evento y correo recibido.
+- Configuración del evento y registro de correo enviado. Recepción en bandeja: pendiente.
 
 ## Fuentes
 
 - [Simulación oficial en Python](https://help.ubidots.com/en/articles/569964-simulate-data-in-ubidots-using-python)
+- [Consultar los últimos valores](https://docs.ubidots.com/reference/get-device-last-values)
+- [Consultar un evento](https://docs.ubidots.com/reference/get-event)
+- [Registros de un evento](https://docs.ubidots.com/reference/get-event-logs)
 - [Cuenta educativa STEM](https://ubidots.com/stem)
 - [Límites actuales de STEM](https://help.ubidots.com/en/articles/639806-plans-billing-what-is-the-difference-between-ubidots-and-ubidots-stem)
 

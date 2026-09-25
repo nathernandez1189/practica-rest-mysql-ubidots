@@ -1,0 +1,82 @@
+{
+  "utc": "2026-09-25T02:04:38.964285+00:00",
+  "stage": "normal",
+  "device": "equipo-rest",
+  "payload": {
+    "temperature": 24,
+    "humidity": 65,
+    "position": {
+      "value": 1,
+      "context": {
+        "lat": 4.711,
+        "lng": -74.0721
+      }
+    },
+    "luminosity": 550,
+    "pressure": 750
+  },
+  "http_status": 200,
+  "response": {
+    "humidity": [
+      {
+        "status_code": 201
+      }
+    ],
+    "luminosity": [
+      {
+        "status_code": 201
+      }
+    ],
+    "position": [
+      {
+        "status_code": 201
+      }
+    ],
+    "pressure": [
+      {
+        "status_code": 201
+      }
+    ],
+    "temperature": [
+      {
+        "status_code": 201
+      }
+    ]
+  },
+  "readback": {
+    "temperature": {
+      "value": 24.0,
+      "timestamp": 1790301878650,
+      "context": {},
+      "created_at": 1790301878650
+    },
+    "pressure": {
+      "value": 750.0,
+      "timestamp": 1790301878650,
+      "context": {},
+      "created_at": 1790301878650
+    },
+    "position": {
+      "value": 1.0,
+      "timestamp": 1790301878650,
+      "context": {
+        "lat": 4.711,
+        "lng": -74.0721
+      },
+      "created_at": 1790301878650
+    },
+    "luminosity": {
+      "value": 550.0,
+      "timestamp": 1790301878650,
+      "context": {},
+      "created_at": 1790301878650
+    },
+    "humidity": {
+      "value": 65.0,
+      "timestamp": 1790301878650,
+      "context": {},
+      "created_at": 1790301878650
+    }
+  },
+  "verified": true
+}

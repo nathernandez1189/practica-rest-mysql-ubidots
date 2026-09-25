@@ -7,7 +7,7 @@ Computación en la Nube · Especialización · 24 de septiembre de 2026
 
 Implementación y evidencias de las guías **Práctica REST** y **Práctica REST + MySQL**. Incluye el desafío opcional en JavaScript.
 
-> **Estado de entrega:** APIs y pruebas ejecutadas en Ubuntu. Ubidots está implementado y probado localmente, pero falta una cuenta real para verificar recepción, dashboard y alerta por correo. Esta entrega no afirma que esos requisitos en la nube estén terminados.
+> **Estado de entrega:** APIs y persistencia verificadas en Ubuntu. Ubidots STEM recibió las cinco variables desde Python, curl y Postman/Newman; el tablero y la actualización automática están comprobados. El evento `temperature > 30` registra el correo como enviado. **Solo falta confirmar la recepción en la bandeja institucional**, que no se ha inspeccionado.
 
 ## Empezar por aquí
 
@@ -15,10 +15,8 @@ Implementación y evidencias de las guías **Práctica REST** y **Práctica REST
 - [Matriz de requisitos y evidencias](docs/MATRIZ_REQUISITOS.md)
 - [Cómo reproducir la práctica](docs/REPRODUCIR.md)
 - [Guía de sustentación para los tres integrantes](docs/GUIA_SUSTENTACION.md)
-- [Completar Ubidots](docs/UBIDOTS.md)
+- [Ubidots: resultados y reproducción](docs/UBIDOTS.md)
 - [Fuentes y adaptaciones del material docente](docs/REFERENCIAS.md)
-
-![Resumen de evidencias](evidencias/pantallazos/01-resumen.png)
 
 ## Qué contiene
 
@@ -36,7 +34,9 @@ flowchart LR
   C --> J[JavaScript :5002]
   P --> D[(MySQL - rest_equipo)]
   J --> D
-  S[Simulador Python - 5 variables] -. Pendiente de cuenta .-> U[Ubidots - dashboard y evento]
+  S[Simulador Python - 5 variables] --> U[Ubidots STEM - 5 widgets]
+  U --> E[Evento temperature mayor de 30]
+  E --> A[Correo enviado - registro confirmado]
 ```
 
 ## Resultados verificados
@@ -51,11 +51,17 @@ Los grupos siguientes contienen comprobaciones complementarias y parcialmente so
 | curl: CRUD y validaciones | 21 respuestas correctas, 7 por API | [memoria](evidencias/curl-memoria.txt), [MySQL](evidencias/curl-mysql.txt), [JavaScript](evidencias/curl-javascript.txt) |
 | Consulta directa MySQL | Tabla, columnas y registros visibles | [mysql-tabla.txt](evidencias/mysql-tabla.txt) |
 | Apagado y encendido de Ubuntu | Ver registro antes/después | [persistencia.json](evidencias/persistencia.json) |
-| Simulador con cinco variables | Generación y contrato local comprobados | [simulación local](evidencias/ubidots-simulacion-local.txt) |
+| Ubidots desde Python | 5 envíos de 5 variables recibidos | [envío real](evidencias/ubidots/python-envio-real.txt) |
+| Ubidots desde curl | 5 variables recibidas | [respuesta real](evidencias/ubidots/curl-envio-real.json) |
+| Ubidots desde Postman/Newman | 12 aserciones correctas: envío y lectura | [resultado](evidencias/ubidots/postman-newman.txt) |
+| Dashboard Ubidots | 5 widgets y actualización automática | [alerta 34 °C](evidencias/pantallazos/07-ubidots-alerta-34.png), [recuperación 24 °C](evidencias/pantallazos/08-ubidots-recuperacion-24.png) |
+| Evento de temperatura | Correo enviado; ejecución exitosa | [registro oficial](evidencias/ubidots/evento-logs.json), [captura](evidencias/pantallazos/09-ubidots-evento-enviado.png) |
 
 **Precisión sobre Postman:** se ejecutó la colección con Newman, su ejecutor oficial. No se presentan esos resultados como pruebas mediante la interfaz gráfica de Postman.
 
-**Precisión sobre IoT:** las pruebas de respuestas Ubidots usan dobles de prueba; no contactan el servicio. La generación local tampoco certifica recepción en la nube.
+**Precisión sobre IoT:** las pruebas unitarias usan dobles y `--dry-run` genera datos locales. Las pruebas reales adicionales están en `evidencias/ubidots/`; consultan el servicio y comprueban los valores guardados. El registro `Sent` acredita el envío del correo, no su recepción en la bandeja.
+
+![Tablero real de Ubidots](evidencias/pantallazos/08-ubidots-recuperacion-24.png)
 
 ## Uso rápido en el entorno probado
 

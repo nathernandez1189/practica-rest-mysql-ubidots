@@ -1,0 +1,42 @@
+newman
+
+Ubidots | cinco variables
+
+→ Enviar cinco variables a Ubidots
+  POST https://industrial.api.ubidots.com/api/v1.6/devices/equipo-rest/ [200 OK, 338B, 377ms]
+  ✓  HTTP correcto
+  ✓  Recepción temperature
+  ✓  Recepción humidity
+  ✓  Recepción position
+  ✓  Recepción luminosity
+  ✓  Recepción pressure
+
+→ Consultar y comprobar los cinco valores recibidos
+  GET https://industrial.api.ubidots.com/api/v2.0/devices/~equipo-rest/_/values/last [200 OK, 739B, 148ms]
+  ✓  Lectura HTTP 200
+  ✓  Valor guardado temperature
+  ✓  Valor guardado humidity
+  ✓  Valor guardado luminosity
+  ✓  Valor guardado pressure
+  ✓  Posición guardada
+
+┌─────────────────────────┬─────────────────────┬────────────────────┐
+│                         │            executed │             failed │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│              iterations │                   1 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│                requests │                   2 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│            test-scripts │                   2 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│      prerequest-scripts │                   0 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│              assertions │                  12 │                  0 │
+├─────────────────────────┴─────────────────────┴────────────────────┤
+│ total run duration: 2.9s                                           │
+├────────────────────────────────────────────────────────────────────┤
+│ total data received: 711B (approx)                                 │
+├────────────────────────────────────────────────────────────────────┤
+│ average response time: 262ms [min: 148ms, max: 377ms, s.d.: 114ms] │
+└────────────────────────────────────────────────────────────────────┘
+

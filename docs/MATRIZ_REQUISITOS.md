@@ -14,15 +14,16 @@ Fecha de ejecución: 24 de septiembre de 2026, zona America/Bogota. Los registro
 | MySQL: pruebas Postman | Verificado mediante Newman | `evidencias/newman-5001.*`. Interfaz gráfica no ejecutada |
 | MySQL: explicar efecto de apagar VM | Prueba de apagado/encendido registrada | `vm-apagada.txt`, `vm-encendido.txt`, `persistencia.json` |
 | MySQL: desafío en otro lenguaje | Verificado | JavaScript + MySQL, puerto 5002; HTTP, curl y Newman |
-| Ubidots: simulador Python con requests | Implementado; pruebas locales aprobadas | `testUbidots.py`, `tests/test_ubidots.py` |
-| Ubidots: dos variables adicionales | Implementado y generado localmente | `luminosity`, `pressure`; cinco variables en el payload |
-| Ubidots: recepción desde Python | Pendiente de cuenta/token | No se hicieron envíos reales a una cuenta |
-| Ubidots: actualización con curl | Script preparado; pendiente en nube | `scripts/ubidots_curl.sh` |
-| Ubidots: actualización con Postman | Colección preparada; pendiente en nube | `postman/Ubidots.postman_collection.json` |
-| Ubidots: gauge de humedad, mapa y barras de temperatura | Pendiente de cuenta | Procedimiento exacto en `docs/UBIDOTS.md` |
-| Ubidots: widgets de las dos nuevas variables | Pendiente de cuenta | Indicador de luminosidad y línea de presión previstos |
-| Ubidots: actualización visible en tiempo real | Pendiente de cuenta | No se certifica con una simulación local |
-| Ubidots: evento y correo recibido | Pendiente de cuenta y destinatario autorizado | No se creó ni se envió una alerta real |
+| Ubidots: simulador Python con requests | Verificado en nube | `evidencias/ubidots/python-envio-real.txt`; cinco envíos |
+| Ubidots: dos variables adicionales | Verificado | `luminosity` y `pressure` recibidas y visibles |
+| Ubidots: recepción desde Python | Verificado | 25 valores aceptados; HTTP 200 y códigos internos 201 |
+| Ubidots: actualización con curl | Verificado | `evidencias/ubidots/curl-envio-real.json` |
+| Ubidots: actualización con Postman | Verificado mediante Newman | 12 aserciones; envío y consulta de las cinco variables |
+| Ubidots: gauge, mapa y barras | Verificado | Capturas 07 y 08 del dashboard real |
+| Ubidots: widgets de las dos nuevas variables | Verificado | Indicador de luminosidad y línea de presión |
+| Ubidots: actualización visible en tiempo real | Verificado | 34→24 °C, 78→65 %, 820→550 lux y 754→750 hPa |
+| Ubidots: evento y envío de correo | Verificado | `evento-configuracion.json`; `evento-logs.json`, éxito a las 21:08:03 |
+| Ubidots: correo recibido | Pendiente de inspección de bandeja institucional | Envío confirmado por Ubidots; recepción final aún no observada |
 
 ## Alcance de las capturas
 

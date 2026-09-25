@@ -1,0 +1,641 @@
+{
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 171314959,
+      "event": "6ab5d63983324fe7ed3dd57c",
+      "logType": "event_update",
+      "message": "Event \"Practica REST - temperatura > 30 C\" updated",
+      "context": {
+        "id": "6ab5d63983324fe7ed3dd57c",
+        "name": "Practica REST - temperatura > 30 C",
+        "label": "prctica-rest.-temperatura-30-c",
+        "event_data": {
+          "id": "6ab5d63983324fe7ed3dd57c",
+          "name": "Practica REST - temperatura > 30 C",
+          "tags": [],
+          "active": true,
+          "owner_id": 1744600,
+          "settings": {
+            "dates": [
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ]
+            ],
+            "active": true,
+            "timezone": "America/Bogota",
+            "retrigger_while_active": false
+          },
+          "created_at": 1790301753506,
+          "description": "Equipo: Natalia Hernandez, Miguel Angel Diuza y Juan Ospina. Sensor simulado equipo-rest/temperature. Un correo por cruce del umbral; sin repeticion periodica.",
+          "payload_json": {
+            "event_data": {
+              "name": "Practica REST - temperatura > 30 C",
+              "tags": [],
+              "actions": [
+                {
+                  "data": {
+                    "emails": [
+                      "[CORREO OCULTO]"
+                    ],
+                    "message": "Prueba academica de Natalia Hernandez, Miguel Angel Diuza y Juan Ospina. El sensor simulado temperature de equipo-rest supero 30 grados Celsius. Esta alerta valida el flujo API REST, evento y correo de Ubidots. No corresponde a una emergencia real.",
+                    "subject": "Practica REST - Alerta de temperatura del equipo"
+                  },
+                  "name": "Send Email",
+                  "type": "email",
+                  "idGroupAction": "EJOMMg3",
+                  "back_to_normal": false
+                }
+              ],
+              "triggers": [
+                [
+                  {
+                    "type": "last_value",
+                    "entity": {
+                      "type": "variable",
+                      "value": [
+                        {
+                          "id": "6ab5d3a78a1dfda3acb57c07"
+                        }
+                      ],
+                      "operator": "or"
+                    },
+                    "condition": {
+                      "type": "value",
+                      "delay": 0,
+                      "value": 30.0,
+                      "operator": ">"
+                    }
+                  }
+                ]
+              ],
+              "is_active": true,
+              "description": "Equipo: Natalia Hernandez, Miguel Angel Diuza y Juan Ospina. Sensor simulado equipo-rest/temperature. Un correo por cruce del umbral; sin repeticion periodica.",
+              "active_dates": {
+                "dates": [
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ]
+                ],
+                "timezone": "America/Bogota"
+              },
+              "cool_down_period": 1,
+              "retrigger_while_active": false
+            },
+            "expression": "\"6ab5d3a78a1dfda3acb57c07\" > 30.0",
+            "action_keys": [
+              "true"
+            ],
+            "force_actions": false,
+            "actions_inactive": {
+              "true": []
+            },
+            "cool_down_period": 1,
+            "event_flow_types": [
+              "complex-condition"
+            ],
+            "actions_activated": {
+              "true": [
+                {
+                  "id": "send-email",
+                  "to": "[CORREO OCULTO]",
+                  "message": "Prueba academica de Natalia Hernandez, Miguel Angel Diuza y Juan Ospina. El sensor simulado temperature de equipo-rest supero 30 grados Celsius. Esta alerta valida el flujo API REST, evento y correo de Ubidots. No corresponde a una emergencia real.",
+                  "subject": "Practica REST - Alerta de temperatura del equipo",
+                  "repeat_action": false,
+                  "max_repetitions": null,
+                  "repeat_interval": {}
+                }
+              ]
+            },
+            "variable_triggers": [
+              "6ab5d3a78a1dfda3acb57c07"
+            ],
+            "independent_conditions": true,
+            "retrigger_while_active": false
+          },
+          "organization_id": null
+        }
+      },
+      "price": 0,
+      "createdAt": "2026-09-25T02:08:37.228835Z"
+    },
+    {
+      "id": 171314942,
+      "event": "6ab5d63983324fe7ed3dd57c",
+      "logType": "action_emails",
+      "message": "Email sent to [CORREO OCULTO]",
+      "context": {
+        "end_time": 1790302083241,
+        "variable": {
+          "id": "6ab5d3a78a1dfda3acb57c07",
+          "name": "temperature",
+          "value": 34.0,
+          "timestamp": 1790302083121
+        },
+        "start_time": 1790302083164,
+        "is_triggered": true,
+        "request_data": {
+          "message": "Prueba acadmica de Natalia Hernndez, Miguel ngel Diuza y Juan Ospina. El sensor simulado temperature del dispositivo equipo-rest super 30 °C. Esta alerta valida el flujo Python/curl/Postman. API REST de Ubidots. evento. correo. No corresponde a una emergencia real.",
+          "subject": "Prctica REST - Alerta de temperatura del equipo",
+          "receiver": "[CORREO OCULTO]",
+          "from_email": "Notifications Ubidots <[CORREO OCULTO]>"
+        },
+        "response_data": {
+          "body": "{\"ErrorCode\":0,\"Message\":\"OK\",\"MessageID\":\"51515019-0d1e-4fc6-9114-242f40991da1\",\"SubmittedAt\":\"2026-09-25T02:08:03.1815366Z\",\"To\":\"[CORREO OCULTO]\"}",
+          "headers": {
+            "Date": "Fri, 25 Sep 2026 02:08:03 GMT",
+            "Vary": "Accept-Encoding, Origin",
+            "Connection": "keep-alive",
+            "Content-Type": "application/json; charset=utf-8",
+            "RateLimit-Limit": "5000",
+            "RateLimit-Reset": "1",
+            "Content-Encoding": "gzip",
+            "Transfer-Encoding": "chunked",
+            "X-Postmark-Server": "2727663",
+            "X-Postmark-Account": "39760",
+            "RateLimit-Remaining": "4999",
+            "X-RateLimit-Limit-Second": "5000",
+            "Strict-Transport-Security": "max-age=16000000;",
+            "X-RateLimit-Remaining-Second": "4999"
+          },
+          "status_code": 200
+        },
+        "organization_id": null,
+        "successful_execution": true
+      },
+      "price": 1,
+      "createdAt": "2026-09-25T02:08:03.249675Z"
+    },
+    {
+      "id": 171314726,
+      "event": "6ab5d63983324fe7ed3dd57c",
+      "logType": "event_update",
+      "message": "Event \"Practica REST - temperatura > 30 C\" updated",
+      "context": {
+        "id": "6ab5d63983324fe7ed3dd57c",
+        "name": "Practica REST - temperatura > 30 C",
+        "label": "prctica-rest.-temperatura-30-c",
+        "event_data": {
+          "id": "6ab5d63983324fe7ed3dd57c",
+          "name": "Practica REST - temperatura > 30 C",
+          "tags": [],
+          "active": true,
+          "owner_id": 1744600,
+          "settings": {
+            "dates": [
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ]
+            ],
+            "active": true,
+            "timezone": "America/Bogota",
+            "retrigger_while_active": false
+          },
+          "created_at": 1790301753506,
+          "description": "Equipo: Natalia Hernandez, Miguel Angel Diuza y Juan Ospina. Sensor simulado equipo-rest/temperature. Un correo por cruce del umbral; sin repeticion periodica.",
+          "payload_json": {
+            "event_data": {
+              "name": "Practica REST - temperatura > 30 C",
+              "tags": [],
+              "actions": [
+                {
+                  "data": {
+                    "emails": [
+                      "[CORREO OCULTO]"
+                    ],
+                    "message": "Prueba acadmica de Natalia Hernndez, Miguel ngel Diuza y Juan Ospina. El sensor simulado temperature del dispositivo equipo-rest super 30 °C. Esta alerta valida el flujo Python/curl/Postman. API REST de Ubidots. evento. correo. No corresponde a una emergencia real.",
+                    "subject": "Prctica REST - Alerta de temperatura del equipo"
+                  },
+                  "name": "Send Email",
+                  "type": "email",
+                  "idGroupAction": "EJOMMg3",
+                  "back_to_normal": false
+                }
+              ],
+              "triggers": [
+                [
+                  {
+                    "type": "last_value",
+                    "entity": {
+                      "type": "variable",
+                      "value": [
+                        {
+                          "id": "6ab5d3a78a1dfda3acb57c07"
+                        }
+                      ],
+                      "operator": "or"
+                    },
+                    "condition": {
+                      "type": "value",
+                      "delay": 0,
+                      "value": 30.0,
+                      "operator": ">"
+                    }
+                  }
+                ]
+              ],
+              "is_active": true,
+              "description": "Equipo: Natalia Hernandez, Miguel Angel Diuza y Juan Ospina. Sensor simulado equipo-rest/temperature. Un correo por cruce del umbral; sin repeticion periodica.",
+              "active_dates": {
+                "dates": [
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ]
+                ],
+                "timezone": "America/Bogota"
+              },
+              "cool_down_period": 1,
+              "retrigger_while_active": false
+            },
+            "expression": "\"6ab5d3a78a1dfda3acb57c07\" > 30.0",
+            "action_keys": [
+              "true"
+            ],
+            "force_actions": false,
+            "actions_inactive": {
+              "true": []
+            },
+            "cool_down_period": 1,
+            "event_flow_types": [
+              "complex-condition"
+            ],
+            "actions_activated": {
+              "true": [
+                {
+                  "id": "send-email",
+                  "to": "[CORREO OCULTO]",
+                  "message": "Prueba acadmica de Natalia Hernndez, Miguel ngel Diuza y Juan Ospina. El sensor simulado temperature del dispositivo equipo-rest super 30 °C. Esta alerta valida el flujo Python/curl/Postman. API REST de Ubidots. evento. correo. No corresponde a una emergencia real.",
+                  "subject": "Prctica REST - Alerta de temperatura del equipo",
+                  "repeat_action": false,
+                  "max_repetitions": null,
+                  "repeat_interval": {}
+                }
+              ]
+            },
+            "variable_triggers": [
+              "6ab5d3a78a1dfda3acb57c07"
+            ],
+            "independent_conditions": true,
+            "retrigger_while_active": false
+          },
+          "organization_id": null
+        }
+      },
+      "price": 0,
+      "createdAt": "2026-09-25T02:04:04.242825Z"
+    },
+    {
+      "id": 171314624,
+      "event": "6ab5d63983324fe7ed3dd57c",
+      "logType": "event_create",
+      "message": "Event \"Prctica REST. ·temperatura > 30 °C\" created",
+      "context": {
+        "id": "6ab5d63983324fe7ed3dd57c",
+        "name": "Prctica REST. ·temperatura > 30 °C",
+        "label": "prctica-rest.-temperatura-30-c",
+        "event_data": {
+          "id": "6ab5d63983324fe7ed3dd57c",
+          "name": "Prctica REST. ·temperatura > 30 °C",
+          "tags": [],
+          "active": true,
+          "owner_id": 1744600,
+          "settings": {
+            "dates": [
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ],
+              [
+                [
+                  "00:00",
+                  "23:59"
+                ]
+              ]
+            ],
+            "active": true,
+            "timezone": "America/Bogota",
+            "retrigger_while_active": false
+          },
+          "created_at": 1790301753506,
+          "description": "Equipo: Natalia Hernndez, Miguel ngel Diuza y Juan Ospina. Sensor simulado equipo-rest/temperature. Una notificacin por cruce del umbral, sin repeticin peridica.",
+          "payload_json": {
+            "event_data": {
+              "name": "Prctica REST. ·temperatura > 30 °C",
+              "tags": [],
+              "actions": [
+                {
+                  "data": {
+                    "emails": [
+                      "[CORREO OCULTO]"
+                    ],
+                    "message": "Prueba acadmica de Natalia Hernndez, Miguel ngel Diuza y Juan Ospina. El sensor simulado temperature del dispositivo equipo-rest super 30 °C. Esta alerta valida el flujo Python/curl/Postman. API REST de Ubidots. evento. correo. No corresponde a una emergencia real.",
+                    "subject": "Prctica REST - Alerta de temperatura del equipo"
+                  },
+                  "name": "Send Email",
+                  "type": "email",
+                  "idGroupAction": "EJOMMg3",
+                  "back_to_normal": false
+                }
+              ],
+              "triggers": [
+                [
+                  {
+                    "type": "last_value",
+                    "entity": {
+                      "type": "variable",
+                      "value": [
+                        {
+                          "id": "6ab5d3a78a1dfda3acb57c07"
+                        }
+                      ],
+                      "operator": "or"
+                    },
+                    "condition": {
+                      "type": "value",
+                      "delay": 0,
+                      "value": 30.0,
+                      "operator": ">"
+                    }
+                  }
+                ]
+              ],
+              "is_active": true,
+              "description": "Equipo: Natalia Hernndez, Miguel ngel Diuza y Juan Ospina. Sensor simulado equipo-rest/temperature. Una notificacin por cruce del umbral, sin repeticin peridica.",
+              "active_dates": {
+                "dates": [
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ],
+                  [
+                    [
+                      "00:00",
+                      "23:59"
+                    ]
+                  ]
+                ],
+                "timezone": "America/Bogota"
+              },
+              "cool_down_period": 1,
+              "retrigger_while_active": false
+            },
+            "expression": "\"6ab5d3a78a1dfda3acb57c07\" > 30.0",
+            "action_keys": [
+              "true"
+            ],
+            "force_actions": false,
+            "actions_inactive": {
+              "true": []
+            },
+            "cool_down_period": 1,
+            "event_flow_types": [
+              "complex-condition"
+            ],
+            "actions_activated": {
+              "true": [
+                {
+                  "id": "send-email",
+                  "to": "[CORREO OCULTO]",
+                  "message": "Prueba acadmica de Natalia Hernndez, Miguel ngel Diuza y Juan Ospina. El sensor simulado temperature del dispositivo equipo-rest super 30 °C. Esta alerta valida el flujo Python/curl/Postman. API REST de Ubidots. evento. correo. No corresponde a una emergencia real.",
+                  "subject": "Prctica REST - Alerta de temperatura del equipo",
+                  "repeat_action": false,
+                  "max_repetitions": null,
+                  "repeat_interval": {}
+                }
+              ]
+            },
+            "variable_triggers": [
+              "6ab5d3a78a1dfda3acb57c07"
+            ],
+            "independent_conditions": true,
+            "retrigger_while_active": false
+          },
+          "organization_id": null
+        }
+      },
+      "price": 0,
+      "createdAt": "2026-09-25T02:02:33.622135Z"
+    }
+  ]
+}

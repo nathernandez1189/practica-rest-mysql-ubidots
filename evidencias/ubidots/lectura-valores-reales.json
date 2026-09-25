@@ -1,0 +1,39 @@
+{
+  "utc": "2026-09-25T01:57:04.281215+00:00",
+  "http_status": 200,
+  "values": {
+    "temperature": {
+      "value": 24.0,
+      "timestamp": 1790301422582,
+      "context": {},
+      "created_at": 1790301422582
+    },
+    "pressure": {
+      "value": 750.0,
+      "timestamp": 1790301422582,
+      "context": {},
+      "created_at": 1790301422582
+    },
+    "position": {
+      "value": 1.0,
+      "timestamp": 1790301422582,
+      "context": {
+        "lat": 4.711,
+        "lng": -74.0721
+      },
+      "created_at": 1790301422582
+    },
+    "luminosity": {
+      "value": 550.0,
+      "timestamp": 1790301422582,
+      "context": {},
+      "created_at": 1790301422582
+    },
+    "humidity": {
+      "value": 65.0,
+      "timestamp": 1790301422582,
+      "context": {},
+      "created_at": 1790301422582
+    }
+  }
+}
